@@ -4,6 +4,11 @@ This publication repository uses one semantic version for the entire four-skill 
 
 ## [Unreleased]
 
+### Documentation
+
+- Added global installation instructions for multiple coding agents and their CLI identifiers.
+- Expanded usage examples for lifecycle coordination, change intake, decision governance, and guided Interactive/Auto implementation.
+
 ## [0.1.0] - 2026-10-10
 
 Initial publication package, prepared locally; a version entry does not itself indicate that a tag, GitHub Release, or plugin listing has been published.

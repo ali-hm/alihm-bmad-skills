@@ -26,13 +26,39 @@ See [compatibility and dependencies](docs/compatibility.md) for the inspected up
 
 First install and set up BMad using the [upstream instructions](https://github.com/bmad-code-org/BMAD-METHOD). Ask the installed bmad skill to set up the Method and Core Tools modules in your target project.
 
-After this repository is published, install this bundle globally for Codex:
+Install all four skills globally for the agents detected by the Skills CLI. Follow its agent-selection prompts when shown:
 
 ~~~powershell
-npx skills add ali-hm/alihm-bmad-skills --skill "*" --agent codex --global
+npx skills add ali-hm/alihm-bmad-skills --skill "*" --global
 ~~~
 
-To install for one project instead, run the command from that project and omit --global. Other supported agents can use their Skills CLI agent identifier; host compatibility still needs checking.
+Global installation makes the skills available across projects for your user account. It does not install BMad or configure individual projects.
+
+To select agents explicitly, use their CLI identifiers. For example, install globally for Claude Code, Cursor, and GitHub Copilot together:
+
+~~~powershell
+npx skills add ali-hm/alihm-bmad-skills --skill "*" --agent claude-code --agent cursor --agent github-copilot --global
+~~~
+
+| Agent | CLI identifier |
+| --- | --- |
+| Claude Code | `claude-code` |
+| Cursor | `cursor` |
+| GitHub Copilot | `github-copilot` |
+| Gemini CLI | `gemini-cli` |
+| Cline | `cline` |
+| Windsurf | `windsurf` |
+| Codex | `codex` |
+
+For a single agent, keep just its identifier. For example:
+
+~~~powershell
+npx skills add ali-hm/alihm-bmad-skills --skill "*" --agent gemini-cli --global
+~~~
+
+The CLI also accepts `--agent "*"` to target all supported agents, including ones you do not currently use. Some agents, such as Eve, support project installation only; use explicit agent identifiers for global installation if the wildcard reports an unsupported target. See the [supported-agent list and installation options](https://github.com/vercel-labs/skills#supported-agents) for the current choices.
+
+To install for one project instead, run the command from that project and omit `--global`. Agent discovery and workflow capabilities still depend on the selected host; installation alone does not verify live BMad execution there.
 
 To inspect the local publishing checkout without installing:
 
@@ -46,24 +72,102 @@ Keep all four companion skills together at the same version. Before installing o
 
 ## Use
 
-In Codex, invoke a skill with its dollar-prefixed name. For example:
+The examples below name the skill in an ordinary request. Use your host's skill invocation mechanism when needed; in Codex, you can invoke a skill with its dollar-prefixed name, such as `$bmad-sdlc`. Replace the sample paths and ticket IDs with your project's actual artifacts.
+
+### Coordinate a project with bmad-sdlc
+
+Use this when you want help choosing and carrying out the next suitable steps across planning and delivery.
 
 ~~~text
-Use $bmad-sdlc to guide a new project from this idea: ...
+Use bmad-sdlc to guide a new project: a volunteer scheduling app for a local
+food bank. Help clarify the users, core workflows, and constraints before
+choosing technologies or scaffolding the app.
 
-Use $bmad-sdlc to turn this approved specification into the next authorized steps: ...
+Use bmad-sdlc with the approved specification at docs/booking-spec.md.
+Check for gaps, then propose a ticket breakdown and implementation order.
+Stop before implementation.
 
-Use $bmad-sdlc to investigate and fix this existing-project bug: ...
+Use bmad-sdlc to investigate and fix duplicate notifications when a user
+reconnects. Approved behavior is one notification per event. Preserve the
+existing API contract and unrelated pending changes.
 
-Use $bmad-sdlc to continue this project's current approved work.
+Use bmad-sdlc to continue this project's current approved work. Verify the
+saved plan, ticket state, and review evidence before resuming the next step.
 
-Use $change-intake-governance to classify this feature request before implementation: ...
+Use bmad-sdlc to report what remains before release. Inspect the current
+evidence without editing files, changing ticket states, or deploying.
+~~~
 
-Use $decision-governance to review this proposed architecture change: ...
+### Classify incoming work with change-intake-governance
 
-Use $bmad-guided-build in Interactive mode for approved ticket 3.2.
+Use this after a planning baseline exists or implementation has started, when new feedback may affect the active work or upstream decisions.
 
-Use $bmad-guided-build in Auto mode for approved ticket 3.2. Do not commit.
+~~~text
+Use change-intake-governance to classify this defect: exporting a report
+omits rows with an empty optional comment. The approved requirement says
+all matching rows must be included. Identify the smallest safe fix route.
+
+Use change-intake-governance for this request: let external guests view
+shared reports. Determine which approved requirements and security
+decisions would change before creating implementation tickets.
+
+Use change-intake-governance to assess upgrading our database driver to
+the next major version. Identify compatibility and deployment impacts,
+and whether an approved technical decision needs reconsideration.
+
+Use change-intake-governance for new feedback during ticket 3.2: add bulk
+editing to the list. Determine whether it belongs in the active ticket
+or needs separate scope approval. Do not expand ticket 3.2 silently.
+~~~
+
+### Review decisions with decision-governance
+
+Use this to evaluate consequential choices and reconcile approved planning artifacts. This workflow does not start implementation.
+
+~~~text
+Use decision-governance to propose a retention policy for uploaded files.
+Compare realistic options, security and operational effects, and affected
+requirements. Wait for my choice before recording an approved decision.
+
+Use decision-governance to review decision ARCH-004, which selects a shared
+database for all tenants. Compare keeping it with tenant isolation options.
+Keep the review read-only until I choose an option.
+
+Use decision-governance to apply my approved change to PROD-007: replace
+30-day report retention with 90 days. Preserve the previous decision as
+superseded, reconcile affected planning artifacts, and check consistency.
+Do not implement the change.
+
+Use decision-governance to check whether the proposed offline mode conflicts
+with approved authentication and data-storage decisions. Identify unresolved
+prerequisites and the planning artifacts each option would affect.
+~~~
+
+### Implement one approved change with bmad-guided-build
+
+Use Interactive mode when you want to review the plan, request further review, and explicitly approve implementation.
+
+~~~text
+Use bmad-guided-build in Interactive mode for approved ticket 3.2.
+Read its owning spec and project instructions, create the implementation
+plan, and present the plan approval menu before editing application code.
+
+Use bmad-guided-build in Interactive mode for approved ticket 3.2.
+I want Party Mode and Advanced Elicitation before deciding whether to
+approve implementation. Let me confirm the Party Mode reviewer roster.
+
+Use bmad-guided-build to resume ticket 3.2 from its existing approved plan.
+Verify that the plan and scope have not materially changed, preserve valid
+review evidence, and complete the remaining review and verification phases.
+~~~
+
+For explicitly authorized Auto mode, name one approved, bounded ticket and retain any source-control restrictions:
+
+~~~text
+Use bmad-guided-build in Auto mode for approved ticket 3.2 only.
+Run its required risk reviews, implementation checks, and independent
+post-implementation review. Do not commit, push, or deploy. Stop for any
+new consequential decision or CRITICAL approval requirement.
 ~~~
 
 Interactive is the default: the user reviews and approves the plan. Auto requires an explicit request and an approved bounded ticket with settled upstream decisions. Its required risk reviews still run; CRITICAL work always requires human approval. Every guided invocation handles one ticket/change and does not automatically advance to the next.
