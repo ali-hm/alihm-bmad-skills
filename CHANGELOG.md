@@ -6,6 +6,7 @@ This publication repository uses one semantic version for the entire four-skill 
 
 ### Documentation
 
+- Expanded the README's bmad-sdlc guide with execution-scope descriptions and 38 explained examples covering supported lifecycle scenarios, Interactive/Auto implementation, planning, and read-only work.
 - Added Linux/macOS installation, update, and maintainer-validation commands alongside Windows examples.
 - Moved the README update/version section directly after installation.
 
