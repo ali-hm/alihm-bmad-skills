@@ -26,18 +26,38 @@ See [compatibility and dependencies](docs/compatibility.md) for the inspected up
 
 First install and set up BMad using the [upstream instructions](https://github.com/bmad-code-org/BMAD-METHOD). Ask the installed bmad skill to set up the Method and Core Tools modules in your target project.
 
+On Windows, Linux, and macOS, install Git and Node.js/npm before using the commands below. Confirm that `git --version`, `node --version`, `npm --version`, and `npx --version` work in your terminal. BMad also needs the uv prerequisite listed above.
+
 Install all four skills globally for the agents detected by the Skills CLI. Follow its agent-selection prompts when shown:
+
+**Windows (PowerShell)**
 
 ~~~powershell
 npx skills add ali-hm/alihm-bmad-skills --skill "*" --global
 ~~~
 
+**Linux and macOS (Bash or Zsh)**
+
+~~~bash
+npx skills add ali-hm/alihm-bmad-skills --skill '*' --global
+~~~
+
+Keep the wildcard quoted so your shell passes it to the CLI rather than expanding local filenames.
+
 Global installation makes the skills available across projects for your user account. It does not install BMad or configure individual projects.
 
 To select agents explicitly, use their CLI identifiers. For example, install globally for Claude Code, Cursor, and GitHub Copilot together:
 
+**Windows (PowerShell)**
+
 ~~~powershell
 npx skills add ali-hm/alihm-bmad-skills --skill "*" --agent claude-code --agent cursor --agent github-copilot --global
+~~~
+
+**Linux and macOS (Bash or Zsh)**
+
+~~~bash
+npx skills add ali-hm/alihm-bmad-skills --skill '*' --agent claude-code --agent cursor --agent github-copilot --global
 ~~~
 
 | Agent | CLI identifier |
@@ -52,23 +72,68 @@ npx skills add ali-hm/alihm-bmad-skills --skill "*" --agent claude-code --agent 
 
 For a single agent, keep just its identifier. For example:
 
+**Windows (PowerShell)**
+
 ~~~powershell
 npx skills add ali-hm/alihm-bmad-skills --skill "*" --agent gemini-cli --global
+~~~
+
+**Linux and macOS (Bash or Zsh)**
+
+~~~bash
+npx skills add ali-hm/alihm-bmad-skills --skill '*' --agent gemini-cli --global
 ~~~
 
 The CLI also accepts `--agent "*"` to target all supported agents, including ones you do not currently use. Some agents, such as Eve, support project installation only; use explicit agent identifiers for global installation if the wildcard reports an unsupported target. See the [supported-agent list and installation options](https://github.com/vercel-labs/skills#supported-agents) for the current choices.
 
 To install for one project instead, run the command from that project and omit `--global`. Agent discovery and workflow capabilities still depend on the selected host; installation alone does not verify live BMad execution there.
 
-To inspect the local publishing checkout without installing:
+For example, on Linux or macOS:
 
-~~~powershell
+~~~bash
+cd /path/to/your/project
+npx skills add ali-hm/alihm-bmad-skills --skill '*'
+~~~
+
+To inspect the local publishing checkout without installing, run this from the checkout in PowerShell, Bash, or Zsh:
+
+~~~shell
 npx skills add . --list
 ~~~
 
 The CLI supports repository discovery, named skills, local paths, and agent-specific installation. [Skills CLI documentation](https://github.com/vercel-labs/skills)
 
 Keep all four companion skills together at the same version. Before installing over existing custom copies, preserve your edits and check which project/global copy the host selects. Refresh the host's skill discovery or start a new conversation after installation if needed.
+
+## Updates and versions
+
+Update the four skills together:
+
+**Windows (PowerShell)**
+
+~~~powershell
+npx skills update bmad-sdlc bmad-guided-build change-intake-governance decision-governance --global
+~~~
+
+**Linux and macOS (Bash or Zsh)**
+
+~~~bash
+npx skills update bmad-sdlc bmad-guided-build change-intake-governance decision-governance --global
+~~~
+
+For a project installation on any of these systems, run from the target project and use `--project` instead of `--global`:
+
+~~~shell
+npx skills update bmad-sdlc bmad-guided-build change-intake-governance decision-governance --project
+~~~
+
+Review [CHANGELOG.md](CHANGELOG.md) before updating, particularly for workflow or approval changes. Updates can replace local edits; maintain modifications in a separate fork or reconcile them before updating.
+
+The CLI uses recorded source information/content hashes to detect changes. Version metadata labels releases; it does not schedule checks or update manually copied skills. Normal repository installs follow their recorded source, so the default branch is kept ready for users. [Skills CLI update mechanism](https://github.com/vercel-labs/skills/blob/main/AGENTS.md)
+
+Git tags and GitHub Releases identify reproducible bundle snapshots. To use a fixed release without following the default branch, check out its tag and install from that local checkout. Keep that installation under an explicit manual upgrade policy; a local-path install does not promise remote update detection.
+
+BMad updates are separate. Use the installed bmad setup/update workflow and recheck compatibility before changing the upstream version.
 
 ## Use
 
@@ -180,29 +245,27 @@ The Git checkpoint inspects pending work; a dirty tree may require a user choice
 
 Installing the bundle makes the skills available; it does not rewrite a project's policies or force every request through governance. To adopt them as project policy, review the [optional project-instruction example](docs/project-instructions.md).
 
-## Updates and versions
-
-Update the four skills together:
-
-~~~powershell
-npx skills update bmad-sdlc bmad-guided-build change-intake-governance decision-governance --global
-~~~
-
-For a project installation, use --project instead of --global. Review [CHANGELOG.md](CHANGELOG.md) before updating, particularly for workflow or approval changes. Updates can replace local edits; maintain modifications in a separate fork or reconcile them before updating.
-
-The CLI uses recorded source information/content hashes to detect changes. Version metadata labels releases; it does not schedule checks or update manually copied skills. Normal repository installs follow their recorded source, so the default branch is kept ready for users. [Skills CLI update mechanism](https://github.com/vercel-labs/skills/blob/main/AGENTS.md)
-
-Git tags and GitHub Releases identify reproducible bundle snapshots. To use a fixed release without following the default branch, check out its tag and install from that local checkout. Keep that installation under an explicit manual upgrade policy; a local-path install does not promise remote update detection.
-
-BMad updates are separate. Use the installed bmad setup/update workflow and recheck compatibility before changing the upstream version.
-
 ## Maintain or publish this repository
 
 Install validation dependencies and check the package from its root:
 
+**Windows (PowerShell)**
+
 ~~~powershell
 python -m pip install -r requirements-dev.txt
 python scripts/validate.py
+~~~
+
+**Linux and macOS (Bash or Zsh)**
+
+Use a local virtual environment for the validation dependencies:
+
+~~~bash
+python3 -m venv .venv
+source .venv/bin/activate
+python -m pip install -r requirements-dev.txt
+python scripts/validate.py
+deactivate
 ~~~
 
 Python 3.10+ is required for this repository's validation tooling. It is separate from the application stack and BMad's uv-managed runtime.

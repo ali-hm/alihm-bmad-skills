@@ -4,6 +4,11 @@ This publication repository uses one semantic version for the entire four-skill 
 
 ## [Unreleased]
 
+### Documentation
+
+- Added Linux/macOS installation, update, and maintainer-validation commands alongside Windows examples.
+- Moved the README update/version section directly after installation.
+
 ## [0.2.0] - 2026-10-10
 
 ### Changed
