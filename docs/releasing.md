@@ -16,7 +16,7 @@ Version labels do not implement automatic updates. GitHub-backed Skills CLI inst
 4. List the local package through npx skills add . --list. Confirm exactly four skills are discovered without installing them over working copies.
 5. Exercise representative routes in an isolated sample project. Cover an idea, an approved spec, a defect, a consequential change, read-only review, guided Interactive, explicit Auto, missing wrapper, and CRITICAL approval. Record which checks are live versus dry runs.
 6. Create the public GitHub repository and connect this checkout to it. Review the pending files before committing and pushing. Publish only when you intend to make them public.
-7. Tag the validated commit v0.1.0 and create a GitHub Release with matching changelog notes. Do not claim a release exists merely because the changelog has an entry.
+7. When separately authorized, tag the validated commit v<bundle-version> and create a GitHub Release with matching changelog notes. Do not claim a release exists merely because the changelog has an entry.
 
 These are maintainer actions. The validation script and CI never commit, tag, push, create releases, or publish on your behalf.
 
@@ -25,7 +25,7 @@ These are maintainer actions. The validation script and CI never commit, tag, pu
 1. Make scoped changes to the authoritative skills/ copies in this repository. Installed copies are consumers; avoid maintaining divergent originals.
 2. Update plugin.json, all four metadata.version values, the README version, and CHANGELOG.md together. Use the actual release date. Identify compatibility or approval changes clearly.
 3. Recheck BMad interfaces if the upstream installation changed. Update docs/compatibility.md with the exact evidence and verification limits.
-4. Run package validation and affected behavioral scenarios. Resolve introduced failures and review the final diff.
+4. Run package validation and affected behavioral scenarios using [the four-skill procedure](evaluation.md). Record actual results, independence, and live-versus-dry-run limitations. Resolve introduced failures and review the final diff.
 5. Commit and push the intended release when authorized, then create a new immutable vX.Y.Z tag and GitHub Release. Do not move an already published tag to different content.
 6. Tell users to update the four skills together using the command in README.md. Upstream BMad upgrades remain a separate operation.
 

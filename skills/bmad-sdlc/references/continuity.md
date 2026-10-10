@@ -10,6 +10,8 @@ For substantial lifecycle work, reuse an existing coordinator note or add `sdlc-
 
 The note is a navigation and recovery aid. It cannot approve a decision, clear a failed check, change a ticket state, or override current project truth.
 
+Its coordinator status describes lifecycle navigation, not a guided-build outcome. Preserve the wrapper's exact outcome and phase evidence separately; “scope complete” in a coordinator note cannot convert APPROVED_STOPPED, BLOCKED, or INCOMPLETE implementation into COMPLETE.
+
 ## Minimal progress note
 
 Record the relevant fields, not an empty template for every project:

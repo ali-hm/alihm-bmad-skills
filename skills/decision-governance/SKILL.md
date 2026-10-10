@@ -9,7 +9,7 @@ description: >-
   and validating consistency. Never start implementation.
 license: MIT
 metadata:
-  version: "0.1.0"
+  version: "0.2.0"
 ---
 
 # Decision Governance Workflow
@@ -34,6 +34,8 @@ Every new or changed decision must be:
 Never silently make or change a consequential decision.
 
 Never begin implementation as part of this workflow.
+
+Reuse explicit user choices and approvals already supplied when their decision ID, selected alternative, affected scope, and material proposal still match. Record the source; do not ask the user to approve the same unchanged choice again. New consequential choices or material proposal changes require fresh approval. Permission to reconcile planning does not authorize implementation or external tracker publication.
 
 ---
 
@@ -196,6 +198,23 @@ If an upstream artifact changes, reconcile all affected downstream artifacts.
 
 Never fix an upstream inconsistency only by modifying a downstream ticket.
 
+### Preserve artifact ownership
+
+Before propagation, identify each affected artifact's owner and supported update operation. Dispatch changes through that owner and inspect the returned result:
+
+| Artifact | Update path |
+| --- | --- |
+| Canonical decision register | Project's decision-register procedure; preserve superseded history |
+| Product/UX/architecture artifacts | Owning project/BMad workflow, preserving approved intent |
+| Spec kernel and spec-authored companions | `bmad-spec` with the approved change and full spec context; update its append-only source log through that skill |
+| Adopted spec companions | Their originating workflow; do not treat every file in a spec folder as spec-generated |
+| Tickets, dependencies, acceptance, or status | `bmad-ticket` and the configured store's supported operations |
+| Project instructions or other human-maintained documents | Scoped direct edits only when permitted by that document's policy |
+
+Never hand-patch generated spec outputs, source logs, or ticket-state fields to make downstream documents look consistent. Do not infer that a repository store and an external tracker have interchangeable commands. Pass existing authorization through; external tracker changes still need authorization for that destination and scope.
+
+If an owning workflow is missing or fails, block that propagation path, preserve the approved decision and partial evidence, and continue independent authorized reconciliation. Report the remaining inconsistency rather than declaring planning READY. Do not replace a failed owner with manual edits to its derived files.
+
 ---
 
 # 6. BMAD workflow routing
@@ -255,6 +274,8 @@ Report all findings.
 
 Fix direct mechanical inconsistencies caused by the approved change.
 
+Apply mechanical fixes through the artifact ownership rules above; “mechanical” does not authorize bypassing an owning workflow or generated-file boundary.
+
 For any issue requiring a new consequential decision, stop and ask the user rather than choosing silently.
 
 ---
@@ -291,6 +312,10 @@ READY — planning artifacts are consistent.
 
 or
 
-BLOCKED — additional decision(s) are required.
+BLOCKED — identify the unresolved decision, missing dependency, missing permission, or remaining planning inconsistency that prevents completion.
 
 Do not start implementation automatically.
+
+## Behavioral validation
+
+When authoring or changing this skill, exercise [evaluation.md](references/evaluation.md), including approved-change propagation and missing-owner cases. Keep planning consistency, implementation readiness, and actual implementation separate in the results.

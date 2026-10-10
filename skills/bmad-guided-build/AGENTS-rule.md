@@ -8,7 +8,7 @@ Party Mode, Advanced Elicitation, or any subagent.
 Those outputs are intermediate evidence.
 
 Before the final response:
-1. re-read the persisted Guided Build Execution Ledger and plan;
+1. re-read the persisted Guided Build Execution Ledger and plan when they exist; use an in-response phase record when no plan exists or writes are prohibited;
 2. run the guided-build finalizer;
 3. ensure the response contains BOTH:
    - `## Implementation Result`
@@ -16,8 +16,7 @@ Before the final response:
 4. verify the execution summary includes review trace, plan evolution,
    governance/escalation trace, and final quality gates.
 
-Add and complete a `Final response synthesis` ledger phase.
-If it is not COMPLETE, the guided build is not complete.
+Complete `Final response synthesis` in the ledger, or in the response for a permitted early/read-only exit. Reporting completion does not make implementation complete. Use COMPLETE / APPROVED_STOPPED / CANCELLED / BLOCKED / INCOMPLETE as the actual run outcome.
 
 If the response draft lacks either mandatory heading, do not send it.
 
@@ -27,7 +26,7 @@ Use `bmad-guided-build` for planned ticket/story implementation when governed pl
 
 ### Before each new job
 
-The skill must inspect Git status and, when previous work is uncommitted, ask:
+The skill must inspect Git status and reuse a matching explicit user choice already supplied. An explicit no-commit instruction selects the non-committing path. When previous work is uncommitted and no existing instruction resolves the choice, ask:
 
 1. Commit previous work
 2. Continue without committing
@@ -51,6 +50,8 @@ Review the Plan, Advanced Elicitation, and Party Mode remain repeatable.
 
 Auto mode is allowed only when explicitly requested.
 
+Classify risk in both Interactive and Auto before approval or implementation. The post-implementation reviewer roster depends on this risk in both modes. The following pre-implementation review matrix applies to Auto; Interactive review actions remain user-selected.
+
 Risk policy:
 
 - LOW → structured plan review
@@ -73,9 +74,11 @@ If a required Party Mode, Advanced Elicitation, test, or independent review phas
 
 ### Party Mode independence
 
-When the harness supports parallel subagents, selected Party Mode reviewers must run as independent read-only subagents with separate contexts and must not see each other's findings before completion.
+When the harness supports fresh subagents, selected Party Mode reviewers must run as independent read-only subagents with separate contexts and must not see each other's findings before completion. Use capacity-aware batches or sequential fresh contexts when the roster exceeds available slots; keep all required roles.
 
 If parallel subagents are unavailable, use fresh sequential reviewers where possible and disclose degraded independence if necessary.
+
+Use the skill's bounded scheduling/recovery policy: at most one replacement attempt after a transient blocker changes; otherwise preserve evidence and block the dependent path. Never silently replace a failed required reviewer with a same-context persona.
 
 ### Independent post-implementation review
 
@@ -132,6 +135,8 @@ It must also include:
 
 Never report a phase as COMPLETE without ledger evidence.
 Skipped, failed, unavailable, or degraded phases must be disclosed explicitly.
+
+Phase statuses remain PENDING / IN_PROGRESS / COMPLETE / NOT_APPLICABLE / BLOCKED. Store independence and explicit waivers separately. Approved-and-stopped and cancelled runs do not require unstarted implementation checks; missing required checks in an implementation run remain blockers. Resolve references/execution.md and references/reporting.md from the installed skill's directory for early exits and resumption when copying this rule into a project's instructions.
 
 
 ### Child workflow completion interception

@@ -3,7 +3,7 @@ name: bmad-sdlc
 description: Coordinate BMad across a project's lifecycle, from a simple idea or supplied specification through planning, implementation, validation, and ongoing maintenance. Use for starting or adopting projects, delivering features, fixing bugs, refactoring, or resuming BMad work when the user wants lifecycle guidance and execution. Do not activate for unrelated questions or isolated edits the user is directing.
 license: MIT
 metadata:
-  version: "0.1.0"
+  version: "0.2.0"
 ---
 
 # BMad SDLC
@@ -43,6 +43,8 @@ For new projects, turn vague ideas into enough intent to plan; use supplied spec
 Read [handoffs.md](references/handoffs.md) before invoking a specialist. Supply its supported inputs, the exact work item, relevant artifact paths, constraints, acceptance criteria, and execution permissions.
 
 Automatically choose and execute routine steps already authorized by the request and project policy. Do not ask the user to select skill names, repeat settled decisions, or approve every internal tool call. Honor genuine interaction or approval requirements in the selected workflow unless the user's explicit instructions already resolve them.
+
+Pass the source and scope of existing permissions, current plan approval, no-commit/dirty-baseline choices, and confirmed reviewer rosters through handoffs. Reuse them while the target, material plan, and authorization scope match; reopen only affected choices when evidence changes. Do not turn a nested default prompt into a request to repeat a settled decision.
 
 Choose the guided wrapper's mode without bypassing its own requirements:
 

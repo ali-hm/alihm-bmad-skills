@@ -39,6 +39,7 @@ Prepare a concise dispatch in natural language or the selected skill's documente
 | Authority | Relevant approved decisions, requirements, constraints, and their paths |
 | Acceptance | Observable completion criteria and required checks |
 | Permissions | Read-only/planning/implementation scope; permitted side effects; explicit restrictions |
+| Existing choices | Approval/authorization source and scope, material plan version, dirty-baseline choice, confirmed reviewer roster where relevant |
 | Options | Only documented route, review, mode, or customization options |
 | Result | Expected artifact/evidence and when control returns to this coordinator |
 

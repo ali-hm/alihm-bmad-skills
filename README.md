@@ -2,7 +2,7 @@
 
 Four companion skills for guiding a project from an idea or specification through delivery and ongoing maintenance with BMad.
 
-**Bundle version: 0.1.0. License: MIT.** This is an independent extension; it is not an official BMad distribution.
+**Bundle version: 0.2.0. License: MIT.** This is an independent extension; it is not an official BMad distribution.
 
 | Skill | Responsibility |
 | --- | --- |
@@ -172,6 +172,10 @@ new consequential decision or CRITICAL approval requirement.
 
 Interactive is the default: the user reviews and approves the plan. Auto requires an explicit request and an approved bounded ticket with settled upstream decisions. Its required risk reviews still run; CRITICAL work always requires human approval. Every guided invocation handles one ticket/change and does not automatically advance to the next.
 
+Both modes classify risk before approval or implementation so the implementation-review roster is defined. Reviewers can run in batches when host capacity is limited, while retaining fresh contexts and the required roles. Existing matching approvals, no-commit choices, and confirmed rosters are reused; material changes reopen the affected gates.
+
+The guided wrapper reports COMPLETE, APPROVED_STOPPED, CANCELLED, BLOCKED, or INCOMPLETE separately from individual phase statuses. Early exits do not require creating an empty plan or running implementation checks. See the [execution procedure](skills/bmad-guided-build/references/execution.md) for resuming an older plan or an approved-and-stopped run.
+
 The Git checkpoint inspects pending work; a dirty tree may require a user choice. Auto does not authorize commits, publishing, deployment, or changes to consequential decisions. Project instructions and explicit user permissions remain authoritative.
 
 Installing the bundle makes the skills available; it does not rewrite a project's policies or force every request through governance. To adopt them as project policy, review the [optional project-instruction example](docs/project-instructions.md).
@@ -205,7 +209,7 @@ Python 3.10+ is required for this repository's validation tooling. It is separat
 
 See [release instructions](docs/releasing.md) for version changes, validation, GitHub publication, and optional plugin submission. The root plugin.json packages the same four skills for portable plugin distribution; directory publication is a separate step.
 
-Format validation does not prove live workflow execution. Review [compatibility.md](docs/compatibility.md) and the coordinator's [behavioral scenarios](skills/bmad-sdlc/references/evaluation.md) when assessing readiness.
+Format validation does not prove live workflow execution. Review [compatibility.md](docs/compatibility.md), the [four-skill evaluation procedure](docs/evaluation.md), and [recorded results](docs/evaluation-results.md) when assessing readiness.
 
 ## License and upstream
 

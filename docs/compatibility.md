@@ -38,3 +38,5 @@ Consequential decisions need explicit user approval. Generated BMad artifacts do
 Package validation checks metadata, bundle version agreement, local references, and package structure. Behavioral dry runs inspect routing and permission boundaries. Neither proves that a live BMad build, acceptance test, deployment, or plugin-directory installation succeeds.
 
 Keep live integration results separate from package-check results. The initial publication preparation did not run a live BMad build or publish this package.
+
+The 0.2.0 evaluation procedure covers all four skills and explicitly checks risk classification, early exits, permission reuse, artifact ownership, and reviewer-capacity handling. Consult [evaluation.md](evaluation.md) and [evaluation-results.md](evaluation-results.md) for actual evidence and host-specific NOT_RUN limitations. Prompt-only dry runs do not establish that a host can execute BMad's planning/resume interface or supply independent reviewer contexts.

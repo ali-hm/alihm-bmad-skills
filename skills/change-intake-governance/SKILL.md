@@ -3,7 +3,7 @@ name: change-intake-governance
 description: Classify and route any new issue, bug, story, feature request, enhancement, architecture change, NFR change, dependency upgrade, refactor, incident, security finding, de-scope request, or integration problem after implementation has started. Use BMAD's smallest safe workflow, preserve upstream authority, require explicit approval for consequential changes, and never silently expand the active ticket.
 license: MIT
 metadata:
-  version: "0.1.0"
+  version: "0.2.0"
 ---
 
 # Change Intake Governance
@@ -25,6 +25,8 @@ Use Interactive mode by default. Use the same skill's Auto mode only when explic
 If `bmad-guided-build` is unavailable, report the dependency and block implementation rather than falling back to a raw build. Classification and independent planning may continue.
 
 Do not silently expand the scope of an active ticket.
+
+Reuse existing explicit scope decisions and permissions that still match the affected work. Carry their source, material plan/version, no-commit restrictions, and dirty-baseline choices into the guided handoff. Ask again only for missing or materially changed choices; classification alone does not grant implementation permission.
 
 ## Core authority model
 
@@ -64,6 +66,8 @@ Do not require information that is unnecessary to classify the item.
 # 2. Classify the item
 
 Classify the item into exactly one primary class. Add secondary tags only when useful.
+
+Use substantive authority impact to resolve overlaps. An explicitly review-only external patch enters through EXTERNAL CHANGE / PR / PATCH; report its product/architecture/security conflicts as findings and route them upstream. A dependency upgrade enters through DEPENDENCY / FRAMEWORK / RUNTIME / PLATFORM CHANGE even when defect-motivated, unless it changes approved higher-level scope or technical decisions, which take precedence. Do not let a source label hide the highest affected authority.
 
 ## A. DEFECT
 
@@ -105,6 +109,8 @@ Route:
 6. resume implementation only after the ambiguity is resolved.
 
 Do not let the implementation agent choose silently.
+
+If existing approved authority unambiguously resolves the conflict, reconcile the mistaken downstream artifact through its owner without asking for a new decision. Reopen governance only when intent or approval is unresolved or the proposed resolution would change consequential approved behavior.
 
 ---
 
@@ -302,7 +308,7 @@ Invoke the project's decision-governance workflow whenever the incoming item:
 
 - creates a new consequential product/UX/architecture/security/NFR/technology/deployment decision;
 - reopens or changes an approved decision;
-- introduces a conflict between authoritative artifacts;
+- introduces a conflict between authoritative artifacts whose resolution is not already determined by approved authority; mechanical downstream reconciliation follows the CLARIFICATION rule above;
 - requires a choice that independent implementation agents could make incompatibly.
 
 Do not modify an approved consequential decision without explicit human approval.
@@ -383,3 +389,7 @@ If implementation is authorized and performed, also report:
 - Preserve history when decisions/specs are superseded.
 - Use the smallest safe BMAD workflow.
 - Implementation requires whatever authorization rules are defined in the project's `AGENTS.md`.
+
+## Behavioral validation
+
+When authoring or changing this skill, exercise [evaluation.md](references/evaluation.md). Evaluate classification, permission preservation, and actual handoff choices; packaging checks do not prove workflow behavior.
