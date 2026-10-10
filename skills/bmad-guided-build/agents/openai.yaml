@@ -1,0 +1,7 @@
+interface:
+  display_name: "BMad Guided Build"
+  short_description: "Review and implement one approved change"
+  default_prompt: "Use $bmad-guided-build in Interactive mode for this approved ticket."
+
+policy:
+  allow_implicit_invocation: true

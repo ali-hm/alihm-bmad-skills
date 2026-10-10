@@ -1,0 +1,13 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "name": "alihm-bmad-skills",
+  "version": "0.1.0",
+  "description": "Four companion BMad skills for lifecycle coordination, guided implementation, change intake, and decision governance.",
+  "author": {
+    "name": "Ali"
+  },
+  "homepage": "https://github.com/ali-hm/alihm-bmad-skills",
+  "repository": "https://github.com/ali-hm/alihm-bmad-skills",
+  "license": "MIT",
+  "keywords": ["bmad", "sdlc", "governance", "planning", "code-review"]
+}

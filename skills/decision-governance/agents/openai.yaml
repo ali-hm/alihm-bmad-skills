@@ -1,0 +1,7 @@
+interface:
+  display_name: "Decision Governance"
+  short_description: "Review decisions and reconcile planning artifacts"
+  default_prompt: "Use $decision-governance to evaluate this proposed decision and its downstream impact."
+
+policy:
+  allow_implicit_invocation: true

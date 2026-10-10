@@ -1,0 +1,7 @@
+interface:
+  display_name: "BMad SDLC"
+  short_description: "Guide projects and maintenance through BMad"
+  default_prompt: "Use $bmad-sdlc to assess this project and carry out the next authorized lifecycle step."
+
+policy:
+  allow_implicit_invocation: true

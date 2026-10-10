@@ -1,0 +1,7 @@
+interface:
+  display_name: "Change Intake Governance"
+  short_description: "Classify changes and choose the safe BMad route"
+  default_prompt: "Use $change-intake-governance to classify this request and identify its next authorized step."
+
+policy:
+  allow_implicit_invocation: true
