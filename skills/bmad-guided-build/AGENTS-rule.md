@@ -3,7 +3,7 @@
 When `bmad-guided-build` is active, it owns the final user-facing response.
 
 Never end the run by directly relaying the completion output of `bmad-build`,
-Party Mode, Advanced Elicitation, or any subagent.
+`bmad-review`, Party Mode, Advanced Elicitation, or any subagent.
 
 Those outputs are intermediate evidence.
 
@@ -70,7 +70,7 @@ A required phase is COMPLETE only if:
 - concrete evidence is recorded;
 - a visible result summary was shown to the user.
 
-If a required Party Mode, Advanced Elicitation, test, or independent review phase is missing, Auto mode must stop instead of proceeding.
+If a required Party Mode, Advanced Elicitation, test, independent role review, or initial/final `bmad-review` phase is missing, the dependent path must stop in either mode instead of claiming completion.
 
 ### Party Mode independence
 
@@ -90,6 +90,12 @@ The skill must show reviewer roles, independence mode, findings by severity, dis
 
 BLOCKING findings must be resolved.
 HIGH findings must be resolved unless the user explicitly accepts the residual risk.
+
+### Ticket lens review, fixes, and final re-review
+
+Discover `bmad-review` and its required setup before application implementation. Both modes must explicitly invoke `skill:bmad-review` on the implemented ticket, then triage its findings with the independent role reviews before edits. The main agent fixes valid in-scope findings; reviewers remain read-only. Preserve raw findings and keep the coordinator's severity/disposition assessment separate.
+
+Rerun affected checks, obtain targeted independent re-review of fixes, and invoke final `skill:bmad-review` on the full current ticket diff. The final pass runs even if initial review found nothing. Further edits invalidate affected final evidence. Resolve the installed skill's `references/ticket-review.md` for lens selection, scoped snapshots, permission checks, and the bounded two-correction-cycle policy. Missing/failed required review is BLOCKED; early exits before implementation do not start these passes.
 
 ### Governance boundary
 
@@ -124,7 +130,10 @@ The execution summary must cover:
 - implementation;
 - tests/validation;
 - independent implementation review;
+- initial bmad-review and combined finding triage;
 - review fixes;
+- targeted independent re-review;
+- final bmad-review;
 - final verification.
 
 It must also include:

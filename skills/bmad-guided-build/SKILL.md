@@ -1,9 +1,9 @@
 ---
 name: bmad-guided-build
-description: A human-gated or automatic wrapper around bmad-build with Git checkpoints, mandatory evidence-backed plan review, repeatable Party Mode / Advanced Elicitation, and independent post-implementation review using parallel subagents when available.
+description: A human-gated or automatic wrapper around bmad-build with Git checkpoints, evidence-backed plan review, Party Mode / Advanced Elicitation, independent implementation reviewers, and mandatory bmad-review, finding resolution, and final re-review.
 license: MIT
 metadata:
-  version: "0.2.0"
+  version: "0.3.0"
 ---
 
 # BMad Guided Build
@@ -19,6 +19,7 @@ Coordinate one approved ticket or coherent change through BMad planning, impleme
 - Do not make consequential product, UX, architecture, security, data, deployment, or technology decisions silently. Stop dependent work and route unresolved choices through project governance.
 - Commit, push, deploy, publish, or perform destructive actions only within explicit authorization. Auto does not grant those permissions.
 - Reviewers are read-only and isolated. The main agent owns edits. A child completion message and BMad's internal review do not replace independent review or finalization.
+- Both implementation modes require `bmad-review` before fixes and again on the final ticket changes. Its lenses complement, rather than replace, the risk-required independent reviewers.
 - Required phases need actual execution, concrete evidence, and a visible result summary. Never convert an unavailable or failed phase into a pass.
 
 ## Read the relevant procedure
@@ -28,6 +29,7 @@ Coordinate one approved ticket or coherent change through BMad planning, impleme
 | Start, classify risk, approve, resume, or end early | [Execution and ledger](references/execution.md) |
 | Review a plan, run Party Mode, or run Advanced Elicitation | [Plan review](references/plan-review.md) |
 | Dispatch any reviewers, review implementation, fix, or re-review | [Implementation review and scheduling](references/implementation-review.md) |
+| Run the ticket's initial/final bmad-review and triage its findings | [Ticket review gate](references/ticket-review.md) |
 | Return control, including a blocked or cancelled run | [Reporting and finalizer](references/reporting.md) |
 | Author or evaluate this skill | [Behavioral scenarios](references/evaluation.md) |
 
@@ -36,6 +38,8 @@ Read execution before starting and reporting before ending. Load other reference
 ## 1. Establish the baseline and reuse valid decisions
 
 Read the work item, relevant upstream artifacts, project instructions, Git state, and existing plan/ledger. Resolve the installed `bmad-build` entrypoint and its actual planning/resume interface; do not invent flags or execute template sources.
+
+Before application implementation, also discover `bmad-review` and verify the [ticket review gate's dependencies](references/ticket-review.md#dependency-and-permission-check). Missing review capability blocks implementation readiness; planning may continue within scope.
 
 Reuse explicit choices already supplied for this ticket: no-commit restrictions, permission to continue with pending changes, approved plans, and confirmed reviewer rosters. Verify that their scope and material plan version still match. Record each choice's source. Ask only for a missing decision, materially changed scope, or newly required permission.
 
@@ -78,9 +82,9 @@ Validate acceptance coverage, scope, compatibility, relevant rollback/recovery, 
 
 Resume `bmad-build` from the approved plan. Let it implement, test, and perform its internal review, preserving the one-ticket boundary and permission restrictions.
 
-Then perform mandatory [independent implementation review](references/implementation-review.md). Use the current risk roster, fresh contexts where available, and capacity-aware batches. Collect all required reports before synthesis or edits. Disclose degraded independence if fresh contexts are unavailable.
+Then perform mandatory [independent implementation review](references/implementation-review.md) and the initial [bmad-review ticket pass](references/ticket-review.md) on the same stable implementation snapshot. Use the current risk roster, fresh contexts where available, and capacity-aware batches. Keep findings isolated until all initial reviews finish; disclose degraded independence if fresh contexts are unavailable.
 
-Show the receipt, resolve BLOCKING findings and HIGH findings unless the user explicitly accepts residual risk, rerun affected validation, and obtain targeted independent re-review of fixes. Consequential changes return to governance or approval rather than being hidden in fixes.
+Show both receipts, triage findings, and apply valid fixes within approved scope. Resolve BLOCKING findings and HIGH findings unless the user explicitly accepts residual risk. Rerun affected validation and obtain targeted independent re-review of fixes, then run final `bmad-review` on the full current ticket diff to check fixes and regressions. The final pass is required even if the initial pass had no findings. Consequential changes return to governance or approval rather than being hidden in fixes.
 
 Apply the bounded recovery policy to failing reviewers. Preserve completed evidence and report the blocker rather than repeatedly redispatching unchanged inputs.
 

@@ -2,12 +2,12 @@
 
 Four companion skills for guiding a project from an idea or specification through delivery and ongoing maintenance with BMad.
 
-**Bundle version: 0.2.0. License: MIT.** This is an independent extension; it is not an official BMad distribution.
+**Bundle version: 0.3.0. License: MIT.** This is an independent extension; it is not an official BMad distribution.
 
 | Skill | Responsibility |
 | --- | --- |
 | [bmad-sdlc](skills/bmad-sdlc/SKILL.md) | Coordinate discovery, planning, implementation, verification, resumption, and maintenance. |
-| [bmad-guided-build](skills/bmad-guided-build/SKILL.md) | Plan and implement one ticket/change with review gates, an execution ledger, and independent implementation review. |
+| [bmad-guided-build](skills/bmad-guided-build/SKILL.md) | Plan and implement one ticket/change with independent reviewers, bmad-review, fixes, final re-review, and an execution ledger. |
 | [change-intake-governance](skills/change-intake-governance/SKILL.md) | Classify incoming work by the highest authoritative artifact it changes and choose the smallest safe route. |
 | [decision-governance](skills/decision-governance/SKILL.md) | Analyze consequential decisions, obtain approval, and reconcile affected planning artifacts without starting implementation. |
 
@@ -17,6 +17,7 @@ All implementation handoffs from the three coordinating skills use **bmad-guided
 
 - A coding agent that reads Agent Skills. Codex UI metadata is included for all four skills; other hosts need their own skill discovery support.
 - BMad Method and Core Tools installed and configured for the target project. These four skills do not bundle or automatically install BMad.
+- Guided implementation requires the upstream `bmad-build` and `bmad-review` skills and their project setup. Version 0.3.0 adds initial/final `bmad-review` gates; update all four companion skills together and verify that dependency before implementing.
 - Git for the guided wrapper's previous-work checkpoint, and the tools needed to build/test your application.
 - uv for BMad's Python helpers. Node.js/npm is needed if installing through the Skills CLI.
 
@@ -590,6 +591,22 @@ new consequential decision or CRITICAL approval requirement.
 Interactive is the default: the user reviews and approves the plan. Auto requires an explicit request and an approved bounded ticket with settled upstream decisions. Its required risk reviews still run; CRITICAL work always requires human approval. Every guided invocation handles one ticket/change and does not automatically advance to the next.
 
 Both modes classify risk before approval or implementation so the implementation-review roster is defined. Reviewers can run in batches when host capacity is limited, while retaining fresh contexts and the required roles. Existing matching approvals, no-commit choices, and confirmed rosters are reused; material changes reopen the affected gates.
+
+After implementation and initial validation, both modes run the risk-required independent role reviews and an initial `bmad-review` on the ticket's scoped changes. The coordinator triages every finding, applies valid in-scope fixes, reruns affected checks, and obtains targeted independent re-review. A final `bmad-review` then checks the full current ticket diff for resolved findings and regressions, even if the initial pass found nothing. Required reviews must complete before the wrapper declares success.
+
+Code review uses applicable behavioral and verification lenses; documents use the applicable behavioral/editorial lenses. Raw findings are retained, with separate fix/reject/defer/escalate decisions. Suggestions are not automatic edit instructions, and consequential changes return to governance. Repeated failures or findings remaining after two correction cycles block completion. See the [ticket review procedure](skills/bmad-guided-build/references/ticket-review.md) for dependency checks, snapshots, lens selection, and evidence reuse on resume.
+
+To make the expected cycle explicit in a request:
+
+~~~text
+Use bmad-guided-build in Interactive mode for approved ticket 3.2.
+After implementation, run its independent reviewers and bmad-review,
+triage findings, apply valid in-scope fixes, and rerun affected checks.
+Perform targeted independent re-review and final bmad-review on the
+complete ticket diff. Do not commit, push, or deploy.
+~~~
+
+These review gates are automatic for implemented tickets; the extra wording is optional. Approved-and-stopped, cancelled, and blocked-before-implementation runs do not run implementation reviews. Older unfinished ledgers receive the new review phases without discarding still-valid plan approval or review evidence.
 
 The guided wrapper reports COMPLETE, APPROVED_STOPPED, CANCELLED, BLOCKED, or INCOMPLETE separately from individual phase statuses. Early exits do not require creating an empty plan or running implementation checks. See the [execution procedure](skills/bmad-guided-build/references/execution.md) for resuming an older plan or an approved-and-stopped run.
 

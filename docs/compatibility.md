@@ -19,7 +19,9 @@ This is an authoring reference, not a promise of compatibility with every releas
 
 ## Required capabilities
 
-For guided implementation, the host must discover bmad-build. Party Mode and Advanced Elicitation require bmad-party-mode and bmad-advanced-elicitation for the selected/risk-required phases. If a required capability is absent, stop that path and report the missing dependency.
+For guided implementation, the host must discover bmad-build and bmad-review. Version 0.3.0 adds mandatory initial/final bmad-review passes in both modes; check review setup before application implementation. Party Mode and Advanced Elicitation require bmad-party-mode and bmad-advanced-elicitation for the selected/risk-required phases. If a required capability is absent, stop that path and report the missing dependency.
+
+The installed bmad-review entrypoint and default lens configuration were inspected again on 2026-10-16. That installation supports explicit caller directives, resolved customization, code/document lens applicability, and separate findings without severity. Its available lenses included edge-case-hunter, verification-gap, adversarial, structure, and prose. This does not establish an upstream commit or version range. Resolve actual project overrides, lens codes, ordering, hooks, and output contracts before use; see the [ticket review gate](../skills/bmad-guided-build/references/ticket-review.md).
 
 Lifecycle routes additionally select installed specialists such as bmad-product-brief, bmad-prd, bmad-ux, bmad-architecture, bmad-spec, bmad-ticket, bmad-correct-course, bmad-project-context, and review/QA skills as needed. Not every route needs every specialist.
 
@@ -39,4 +41,4 @@ Package validation checks metadata, bundle version agreement, local references, 
 
 Keep live integration results separate from package-check results. The initial publication preparation did not run a live BMad build or publish this package.
 
-The 0.2.0 evaluation procedure covers all four skills and explicitly checks risk classification, early exits, permission reuse, artifact ownership, and reviewer-capacity handling. Consult [evaluation.md](evaluation.md) and [evaluation-results.md](evaluation-results.md) for actual evidence and host-specific NOT_RUN limitations. Prompt-only dry runs do not establish that a host can execute BMad's planning/resume interface or supply independent reviewer contexts.
+The evaluation procedure covers all four skills and checks risk classification, early exits, permission reuse, artifact ownership, reviewer capacity, and the 0.3.0 ticket review gates. Consult [evaluation.md](evaluation.md) and [evaluation-results.md](evaluation-results.md) for actual evidence and host-specific NOT_RUN limitations. Prompt-only dry runs do not establish that a host can execute BMad's planning/resume interface, run bmad-review, or supply independent reviewer contexts.

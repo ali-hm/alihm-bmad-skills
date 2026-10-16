@@ -28,7 +28,7 @@ This review is separate from:
 - BMAD Build's internal review;
 - the pre-implementation Party Mode.
 
-Its purpose is to independently inspect what was actually implemented.
+Its purpose is to independently inspect what was actually implemented. Also run the mandatory initial [bmad-review ticket pass](ticket-review.md) on the same snapshot. Collect role and lens reports before synthesis or fixes; neither pass replaces the other.
 
 ### Review target
 
@@ -107,7 +107,7 @@ Severity:
 
 ### Mandatory independent-review receipt
 
-Before any fixes, show:
+After all initial role/lens reviews and before any fixes, show this receipt alongside the `bmad-review` receipt, then perform [combined triage](ticket-review.md#initial-pass-and-combined-triage):
 
 ```text
 Independent Implementation Review
@@ -181,7 +181,8 @@ Stop and require governance when a finding requires:
 2. rerun relevant validation;
 3. perform a targeted independent re-review of changed/fixed areas;
 4. show the re-review result;
-5. update ledger.
+5. run the final `bmad-review` pass on the current full ticket diff and reconcile findings as specified in [ticket-review.md](ticket-review.md#fix-validate-and-re-review);
+6. update ledger and ensure final validation/review evidence still matches the final changes.
 
 Do not close a BLOCKING/HIGH finding merely because code changed.
 Require verification evidence.

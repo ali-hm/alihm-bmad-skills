@@ -3,7 +3,7 @@ name: bmad-sdlc
 description: Coordinate BMad across a project's lifecycle, from a simple idea or supplied specification through planning, implementation, validation, and ongoing maintenance. Use for starting or adopting projects, delivering features, fixing bugs, refactoring, or resuming BMad work when the user wants lifecycle guidance and execution. Do not activate for unrelated questions or isolated edits the user is directing.
 license: MIT
 metadata:
-  version: "0.2.0"
+  version: "0.3.0"
 ---
 
 # BMad SDLC
@@ -68,7 +68,7 @@ On "continue" or "what next", verify the saved references against current projec
 
 Match validation to the change and acceptance criteria. A build is not runtime or UI verification. Preserve failed or unavailable checks as such; fix introduced failures before claiming completion.
 
-Reuse adequate review evidence without skipping the guided wrapper's mandatory independent post-implementation review, re-review, or finalizer. Run additional review, end-to-end tests, walkthroughs, or retrospective when requested, locally required, or justified by a remaining gap.
+Reuse adequate review evidence without skipping the guided wrapper's mandatory independent role review, initial/final `bmad-review`, finding resolution, targeted re-review, or finalizer. Run additional review, end-to-end tests, walkthroughs, or retrospective when requested, locally required, or justified by a remaining gap.
 
 For release/operations work, verify deployment, rollback, migration, backup, security, and support requirements only as applicable. Use available specialist skills and tools; if a required capability is missing, identify it rather than inventing a BMad workflow. Deploy, publish, commit, push, and modify external systems only within explicit authorization. Release preparation may include requested local packaging and review artifacts; it does not by itself authorize Git tags, use of production signing keys, remote release creation, or publication.
 

@@ -1,7 +1,7 @@
 {
   "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
   "name": "alihm-bmad-skills",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "Four companion BMad skills for lifecycle coordination, guided implementation, change intake, and decision governance.",
   "author": {
     "name": "Ali"

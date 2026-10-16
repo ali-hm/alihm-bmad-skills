@@ -1,8 +1,36 @@
 # Evaluation results
 
-Bundle: 0.2.0. Date: 2026-10-10 (Asia/Tehran).
-
 This file records actual checks only. Scenario expectations live in the individual skill references. Routing evaluations use hypothetical read-only fixtures; no application was built or deployed during these evaluations.
+
+## 0.3.0 ticket review gates — 2026-10-16 (Asia/Tehran)
+
+One fresh, read-only agent context (`/root/evaluate_ticket_review`, local Codex; model identifier not recorded) evaluated GB13–GB26 and three cross-skill handoffs using the actual skills and relevant references plus raw hypothetical facts. It was instructed not to read expected observations, author diffs, or earlier evaluation results. Evidence is retained in that agent's initial and follow-up final responses in this task history. No first-pass instruction failure was identified in these 17 cases.
+
+| Case | Actual observed decision | Result |
+| --- | --- | --- |
+| GB13 | Missing bmad-review blocks implementation readiness despite approved LOW Auto; no edits or substitute review | PASS |
+| GB14 | Collects stable initial reports, preserves overlap, verifies triage, then fixes/validates/reviews full final diff | PASS |
+| GB15 | Verifies suggestions against scope; consequential API change escalates and requires CRITICAL approval if adopted; unrelated scope not silently implemented | PASS |
+| GB16 | Clean initial reviews do not waive final lenses; fixes/targeted role re-review legitimately NOT_APPLICABLE | PASS |
+| GB17 | Final-review defect invalidates affected evidence; corrected snapshot receives checks, targeted role review, and full final lenses | PASS |
+| GB18 | Failed required lens plus exhausted corrected replacement leaves review BLOCKED; partial reports preserved | PASS |
+| GB19 | Reuses matching old approval/role evidence, adds missing lens/triage phases PENDING, no automatic rebuild | PASS |
+| GB20 | Includes tracked source and ticket-owned untracked test; excludes pre-existing config without altering it | PASS |
+| GB21 | Behavioral document uses applicable behavioral/editorial lenses; no forced code-only lens or phrase-matching tests | PASS |
+| GB22 | Two exhausted corrective cycles with unaccepted HIGH defect yield BLOCKED; no third loop or false closure | PASS |
+| GB23 | External publication hook needs a compatible permitted override or blocks the operation; local writes do not authorize tracker mutation | PASS |
+| GB24 | Approve and stop remains APPROVED_STOPPED despite missing review setup; no implementation or invented clean reviews | PASS |
+| GB25 | Raw shapes/overlap preserved, separate evidence-based wrapper triage; finding count does not authorize fixes | PASS |
+| GB26 | Final review covers full current ticket diff, not only fixes; role re-review may remain targeted | PASS |
+| SD21 | Approved bug routes through guided Interactive; missing review dependency blocks implementation, not authorized intake/planning; no raw fallback | PASS |
+| CI07 | DEFECT classification can complete; downstream review dependency separately blocks implementation, no unnecessary consequential decision | PASS |
+| DG07 | Consistent owner-reconciled planning may be READY; implementation still needs separate permission and review dependency readiness | PASS |
+
+Package checks executed for 0.3.0: `python scripts/validate.py --release --tag v0.3.0`, all four skill-creator `quick_validate.py` checks, and `git diff --check` passed. Tag validation did not create a tag or release. The older 0.2.0 cases below were not rerun wholesale. Live upstream resolver/lens execution, actual fix/re-review integration, and cross-host execution remain NOT_RUN. The PASS rows describe proposed action/state decisions only.
+
+## 0.2.0 baseline — 2026-10-10 (Asia/Tehran)
+
+The following retained evidence was collected for bundle 0.2.0 before the ticket lens gates were added.
 
 ## Method and evidence
 

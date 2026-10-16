@@ -4,6 +4,19 @@ This publication repository uses one semantic version for the entire four-skill 
 
 ## [Unreleased]
 
+## [0.3.0] - 2026-10-16
+
+### Changed
+
+- Added mandatory initial and final upstream bmad-review passes to every implemented guided ticket in both Interactive and Auto, alongside the existing risk-required independent reviewers.
+- Defined scoped review snapshots, applicable resolved lenses, raw finding preservation, separate severity/disposition triage, in-scope fixes, affected validation, targeted role re-review, and a final full-ticket review for regressions.
+- Added a two-correction-cycle limit, permission checks for review hooks, explicit dependency blockers, and ledger/reporting evidence for both passes. Early exits before implementation retain their existing behavior.
+
+### Upgrade notes
+
+- This adds a required dependency and completion gate: ensure upstream bmad-review and its project setup are available before application implementation. Missing or failed required review blocks completion; it is not replaced with self-review.
+- Keep all four companion skills at 0.3.0. On unfinished pre-0.3 work, add missing review phases as PENDING and retain still-valid approval and review evidence. No global installed copies are updated by a repository commit.
+
 ### Documentation
 
 - Expanded the README's bmad-sdlc guide with execution-scope descriptions and 38 explained examples covering supported lifecycle scenarios, Interactive/Auto implementation, planning, and read-only work.

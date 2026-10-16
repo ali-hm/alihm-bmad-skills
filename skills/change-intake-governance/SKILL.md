@@ -3,7 +3,7 @@ name: change-intake-governance
 description: Classify and route any new issue, bug, story, feature request, enhancement, architecture change, NFR change, dependency upgrade, refactor, incident, security finding, de-scope request, or integration problem after implementation has started. Use BMAD's smallest safe workflow, preserve upstream authority, require explicit approval for consequential changes, and never silently expand the active ticket.
 license: MIT
 metadata:
-  version: "0.2.0"
+  version: "0.3.0"
 ---
 
 # Change Intake Governance

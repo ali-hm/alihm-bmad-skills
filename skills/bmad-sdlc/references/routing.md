@@ -68,7 +68,7 @@ If a nested implementation workflow requires an unauthorized side effect, preser
 
 ## Verification, acceptance, and operations
 
-- Guided build owns its mandatory implementation reviews, including the independent post-implementation pass. `bmad-code-review` covers an external diff or a justified extra review; avoid duplication beyond the wrapper's required phases.
+- Guided build owns its mandatory implementation reviews: independent role reviewers, initial `bmad-review`, finding triage/fixes, targeted role re-review, and final `bmad-review`. `bmad-code-review` covers an external diff or a justified extra review; avoid duplication beyond the wrapper's required phases.
 - `bmad-qa-generate-e2e-tests` covers implemented features when that coverage is needed. Follow locally required test-authoring workflows.
 - `bmad-walkthrough` supports human review and understanding.
 - `bmad-retrospective` judges the completed epic as a whole; it does not substitute for integration/acceptance evidence.

@@ -24,7 +24,7 @@ Implemented: <actual changes, or no implementation and why>
 Files: <created, modified, deleted, or none>
 Acceptance: <criterion-level PASS / FAIL / PARTIAL / not exercised>
 Validation: <actual commands/outcomes; unavailable checks separately>
-Reviews/fixes: <BMad internal review; independent findings and re-review>
+Reviews/fixes: <BMad internal review; independent role review; initial/final bmad-review; triage, fixes, and targeted re-review>
 Remaining/deferred: <findings, accepted residual risk, next step>
 Git: <baseline, pending changes, authorized commits/pushes if any>
 
@@ -37,8 +37,9 @@ Git: <baseline, pending changes, authorized commits/pushes if any>
 
 ### Review Trace
 <Structured review; Party Mode roles/independence/findings; elicitation methods;
-implementation reviewers; disagreements; accepted/rejected/escalated findings;
-fixes and targeted re-review. Say not run where applicable.>
+implementation reviewers; initial/final bmad-review lenses and snapshots;
+disagreements; fixed/rejected/deferred/escalated findings and evidence;
+fixes, targeted role re-review, and correction cycles. Say not run where applicable.>
 
 ### Plan Evolution
 <Initial approach, changes/reasons, final approved version; no material changes;
@@ -50,7 +51,8 @@ artifacts, escalated recommendations, remaining blockers; or none.>
 
 ### Quality Gate Summary
 <Plan, risk, required reviews, approval, implementation, tests, independent
-review, re-review, governance: PASS / FAIL / PENDING / NOT_APPLICABLE with reasons.
+review, initial/final bmad-review, triage, re-review, governance:
+PASS / FAIL / PENDING / NOT_APPLICABLE with reasons.
 Remaining BLOCKING/HIGH counts and explicit accepted risk. Actual final outcome.>
 ```
 
@@ -62,6 +64,6 @@ Include every ledger phase, including legitimate NOT_APPLICABLE/BLOCKED entries.
 - **Cancelled before a plan:** CANCELLED, no plan/ledger written, in-response phase record. Respect the stop without further planning/review.
 - **Missing dependency before planning:** BLOCKED with dependency/affected phase; no implementation. Do not read nonexistent artifacts.
 - **Interrupted implementation:** INCOMPLETE/BLOCKED, actual partial changes/checks, safe next action. Unexecuted reviews are not passes.
-- **Successful implementation:** COMPLETE requires acceptance evidence, applicable tests, independent review, resolved BLOCKING findings, resolved HIGH findings or explicit residual-risk acceptance, targeted re-review of fixes, and no governance blocker.
+- **Successful implementation:** COMPLETE requires acceptance evidence, applicable tests, independent role review, initial and final `bmad-review` on valid snapshots, combined finding dispositions, resolved BLOCKING findings, resolved HIGH findings or explicit residual-risk acceptance, targeted re-review of fixes, and no governance blocker. Final reviews/checks must cover the final changes; clean initial findings do not waive final `bmad-review`.
 
 Do not imply deployment, publication, human acceptance, or ticket closure without evidence and authorization for those separate actions.

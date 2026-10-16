@@ -32,4 +32,6 @@ Record these levels separately for each host rather than assuming portable insta
 
 For live integration, use a disposable sample project and pre-authorize its allowed local side effects. Exercise Interactive, explicit Auto, early cancellation, missing dependencies, approval reuse, and reviewer-slot limits. Test each claimed host separately, including its actual fresh-context capability. Tracker publication and deployment require separate scope and fixtures.
 
+For 0.3.0, also exercise actual initial/final bmad-review invocation, scoped tracked/untracked diff staging, resolved lens selection/hooks, finding triage, fix validation, targeted role re-review, final regression findings, and migration of an unfinished older ledger. Dry-run gates and real lens execution are separate evidence.
+
 Current results belong in [evaluation-results.md](evaluation-results.md). NOT_RUN integrations remain unverified; a passing dry run is never a substitute for live execution.

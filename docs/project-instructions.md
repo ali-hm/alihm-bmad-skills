@@ -21,6 +21,8 @@ Route implementation through bmad-guided-build. Do not invoke bmad-build or
 bmad-build-auto directly; only the guided wrapper owns internal build calls.
 Use Interactive mode by default. Auto needs an explicit user request and must
 preserve the wrapper's review, evidence, risk, and human-approval gates.
+For implemented work, keep its independent role reviewers, initial/final
+bmad-review, finding triage/fixes, and affected validation before completion.
 
 Apply project instructions, approved decisions, and user permissions to every
 workflow. Do not commit, push, deploy, or publish without authorization.

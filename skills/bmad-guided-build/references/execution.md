@@ -24,6 +24,8 @@ Do not invent a no-commit flag or bypass an incompatible nested operation. Pass 
 
 On resume, compare ticket, plan, code baseline, approvals, review evidence, and blockers. Reuse valid completed phases; investigate drift before redispatching. Reopen only affected phases. Formatting-only changes do not revoke otherwise valid approval.
 
+For unfinished implemented work from before 0.3.0, add the new initial/final `bmad-review` and triage phases as PENDING. Preserve matching plan approval and independent role-review evidence; do not infer that the newly required passes ran from an older COMPLETE review label. Follow [ticket-review.md](ticket-review.md) for pass reuse and snapshot validity.
+
 ## Risk classification in both modes
 
 Classify before approval or implementation in Interactive and Auto, using the highest applicable level. Record the rationale and show it. Interactive plan reviews remain user-selected; its implementation-review roster still depends on risk.
@@ -64,7 +66,11 @@ Permissions: <scope, restrictions, and authorization source>
 | Implementation | If approved to continue | PENDING | |
 | Tests/validation | If implemented | PENDING | |
 | Independent implementation review | If implemented | PENDING | |
+| Initial bmad-review | If implemented | PENDING | |
+| Combined finding triage | After initial reviews | PENDING | |
 | Review fixes | If findings require | PENDING | |
+| Targeted independent re-review | If fixes require | PENDING | |
+| Final bmad-review | If implemented, even without fixes | PENDING | |
 | Final verification | If implemented | PENDING | |
 | Final response synthesis | Every outcome | PENDING | |
 ```
@@ -72,6 +78,8 @@ Permissions: <scope, restrictions, and authorization source>
 Phase status has exactly five values: PENDING, IN_PROGRESS, COMPLETE, NOT_APPLICABLE, BLOCKED. Independence is separate: PARALLEL SUBAGENTS, BATCHED SUBAGENTS, SEQUENTIAL FRESH CONTEXTS, or DEGRADED. An unavailable required review is BLOCKED, never NOT_APPLICABLE.
 
 Record actual commands/outcomes, plan version, reviewer IDs/roles, findings/receipts, approval source/scope, verification, and re-review results. Required review is COMPLETE only if it ran, evidence was recorded, and results were shown. Completed review can still contain a finding blocking a later gate.
+
+For lens reviews, also record pass/cycle, snapshot, resolved lenses/configuration, raw output, and the coordinator's separate finding dispositions/severity. Follow the [ticket review completion gate](ticket-review.md#ledger-and-completion); final checks and reviews must cover the current changes.
 
 A failed required check is BLOCKED while its failure is outstanding. During an actual authorized corrective run it can be IN_PROGRESS; only passing executed evidence makes that check COMPLETE. Retain earlier failures and do not add FAILED as a sixth status.
 

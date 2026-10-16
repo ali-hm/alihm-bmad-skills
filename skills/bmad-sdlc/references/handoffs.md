@@ -55,7 +55,7 @@ Resolve and read the user's installed `bmad-guided-build/SKILL.md`; this is the 
 
 Interactive is the default. When Auto is explicitly authorized and appropriate, invoke the guided skill in its documented Auto mode (the inspected skill accepts natural-language Auto requests and `--auto` in invocation text). This is not a shell command or renderer option. Do not turn it into `--set workflow.mode=auto` or dispatch `bmad-build-auto`.
 
-Let the guided wrapper own its Git checkpoint, internal build planning/resumption, risk reviews, plan approval, implementation, independent review, ledger, and finalizer. Do not invoke or render its internal build yourself as an alternative entry point. Preserve the wrapper's exact final report contract.
+Let the guided wrapper own its Git checkpoint, internal build planning/resumption, risk reviews, plan approval, implementation, independent role review, initial/final `bmad-review`, finding resolution, ledger, and finalizer. Do not invoke or render its internal build yourself as an alternative entry point. Preserve the wrapper's exact final report contract.
 
 Inspect its checkpoint and other side effects before taking them. Propagate higher-priority source-control restrictions into the wrapper and its delegates; stop an incompatible action rather than inventing a no-commit mode. If the guided skill is missing, report the dependency and block implementation without a raw-build fallback.
 
