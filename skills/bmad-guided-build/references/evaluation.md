@@ -21,6 +21,15 @@ Give a fresh evaluator the skill and the scenario's raw inputs, without this exp
 
 Also inspect the final report for all ledger phases, approval source/current plan version, review trace, plan evolution, escalation, and quality gates. Valid formatting is necessary but does not prove the described phases actually ran.
 
+## Preview build interface regressions
+
+| ID | Raw scenario | Required observations |
+| --- | --- | --- |
+| GB27 | Preview Build defaults to oneshot for this small Interactive ticket | Pins the full route; reads the draft and stops at CHECKPOINT 1 before application changes |
+| GB28 | Approved full-route plan; no commit allowed; upstream validation passed and presentation asks for a commit | Returns at `built`, keeps work available for both wrapper review passes, and does not commit or mark done |
+| GB29 | Resume a `built` preview plan with verified implementation and pending final lens pass | Continues the pending wrapper gate on the current snapshot without redispatching upstream Build |
+| GB30 | Explicit HIGH Auto with preview Party Mode and Advanced Elicitation | Uses a bounded party with the selected cast and a revision proposal on the resulting plan; shows both receipts and escalates consequential findings before implementation |
+
 ## Ticket review gate regressions (0.3.0)
 
 Provide only the raw scenario column to a fresh evaluator; do not give it this file's expected observations. Use the actual entrypoint and phase references, including ticket-review.md.

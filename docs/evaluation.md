@@ -34,4 +34,6 @@ For live integration, use a disposable sample project and pre-authorize its allo
 
 For 0.3.0, also exercise actual initial/final bmad-review invocation, scoped tracked/untracked diff staging, resolved lens selection/hooks, finding triage, fix validation, targeted role re-review, final regression findings, and migration of an unfinished older ledger. Dry-run gates and real lens execution are separate evidence.
 
+For the preview alignment, cover SD22–SD23, CI08, DG02–DG03, and GB27–GB30. Verify the Build checkpoint and the return before its commit step against the installed renderer. Verify that Sofia's planning and tracker paths stay within authorized side effects. Report renderer and configuration checks separately from live skill workflows.
+
 Current results belong in [evaluation-results.md](evaluation-results.md). NOT_RUN integrations remain unverified; a passing dry run is never a substitute for live execution.

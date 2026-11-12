@@ -2,7 +2,7 @@
 
 Four companion skills for guiding a project from an idea or specification through delivery and ongoing maintenance with BMad.
 
-**Bundle version: 0.3.0. License: MIT.** This is an independent extension; it is not an official BMad distribution.
+**Bundle version: 0.4.0. License: MIT.** This is an independent extension.
 
 | Skill | Responsibility |
 | --- | --- |
@@ -16,8 +16,8 @@ All implementation handoffs from the three coordinating skills use **bmad-guided
 ## Requirements
 
 - A coding agent that reads Agent Skills. Codex UI metadata is included for all four skills; other hosts need their own skill discovery support.
-- BMad Method and Core Tools installed and configured for the target project. These four skills do not bundle or automatically install BMad.
-- Guided implementation requires the upstream `bmad-build` and `bmad-review` skills and their project setup. Version 0.3.0 adds initial/final `bmad-review` gates; update all four companion skills together and verify that dependency before implementing.
+- The BMad v7 preview Method and Core Tools installed and configured for the target project. See the [pinned compatibility snapshot](docs/compatibility.md#authoring-snapshot) before upgrading from an older BMad installation.
+- Guided implementation requires the upstream `bmad-build` full route and `bmad-review`. Document and ticket workflows use Mary or John with `bmad-facilitate`, and Sofia (`bmad-agent-po`), as applicable.
 - Git for the guided wrapper's previous-work checkpoint, and the tools needed to build/test your application.
 - uv for BMad's Python helpers. Node.js/npm is needed if installing through the Skills CLI.
 
@@ -134,7 +134,7 @@ The CLI uses recorded source information/content hashes to detect changes. Versi
 
 Git tags and GitHub Releases identify reproducible bundle snapshots. To use a fixed release without following the default branch, check out its tag and install from that local checkout. Keep that installation under an explicit manual upgrade policy; a local-path install does not promise remote update detection.
 
-BMad updates are separate. Use the installed bmad setup/update workflow and recheck compatibility before changing the upstream version.
+BMad updates are separate. Use the upstream `bmad` setup workflow for installed skills and inspect its migration workflow for an older artifact tree. See [compatibility and upgrade steps](docs/compatibility.md) for the current routing changes.
 
 ## Use
 

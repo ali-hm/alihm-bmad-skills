@@ -4,18 +4,19 @@ Use this reference for choosing the next workflow. Apply installed module help w
 
 ## New project from an idea
 
-For a thin idea such as "an app for hikers", gather the missing problem, users, outcome, and constraints through the installed product-brief or requirements workflow. Use ideation or concept challenge only when the user needs that help. Research serves a specific unresolved question.
+For a thin idea such as "an app for hikers", gather the missing problem, users, outcome, and constraints. Use ideation or concept challenge only when the user needs that help. Research serves a specific unresolved question.
 
-The installed BMad Method commonly routes:
+The current BMad Method preview routes:
 
-- Unwritten but understood product intent: `bmad-product-brief`.
-- Requirements needing detail, multiple stakeholders, substantial integrations, or compliance: `bmad-prd`.
+- Product brief, BRD, PRFAQ, or analysis: Mary (`bmad-agent-analyst`).
+- PRD or other planning document: John (`bmad-agent-pm`). Mary and John use `bmad-facilitate` to create, update, or validate documents with the appropriate templates.
 - More ideas needed: `bmad-brainstorming`; challenge one uncertain idea: `bmad-forge-idea`.
 - External evidence needed: `bmad-deep-recon`.
 - User experience needs defining: `bmad-ux`, composed with any locally mandated design skill.
-- Separately built parts need common technical decisions: `bmad-architecture`.
+- Separately built parts need common technical decisions: `bmad-architecture`. Prepare the owning ticket's requirements first and have Sofia adopt the architecture artifact as a companion when it governs that ticket.
+- When requested, turn raw source material into cited notes with `bmad-ingest`, or make a long document navigable with `bmad-shard-pro`. Use the resulting artifacts as inputs to their owning planning workflows.
 
-Fold useful results into `bmad-spec` when a build contract is needed. Do not use spec distillation as a substitute for requirements discovery when the input is too thin. Resolve material assumptions before they become implementation choices.
+When the work needs a ticket tree, pass useful outputs to Sofia (`bmad-agent-po`) for SPEC. Sofia derives Requirements and Constraints on the owning initiative or epic ticket. Resolve material assumptions before decomposition or implementation.
 
 Do not choose frameworks or scaffold an application incidentally. A prototype must be explicitly exploratory; whether to keep it and make its choices durable is a separate decision.
 
@@ -23,7 +24,7 @@ Do not choose frameworks or scaffold an application incidentally. A prototype mu
 
 Read the provided specification and its load-bearing references. Preserve its approved choices and identify gaps or contradictions. Do not restart discovery or create a duplicate PRD just because the lifecycle permits one.
 
-For work spanning multiple builds, use `bmad-spec` to adopt/distill the input if needed, then `bmad-ticket` for an agreed breakdown. Pass existing valid BMad specs directly to their consumers. One bounded session may go directly to `bmad-guided-build` with the supplied intent after required intake.
+For work spanning multiple builds, use Sofia's SPEC operation when the owning ticket still needs requirements, then TICKETS to slice or re-slice the tree and REFINE where individual tickets need work. Reuse an existing ticket and its companions when adequate. An approved standalone specification can remain the input for one bounded `bmad-guided-build` after required intake.
 
 Resolve cross-cutting architecture or security questions before dependent decomposition or code. Planning and implementation permission remain distinct under the project's rules.
 
@@ -50,11 +51,11 @@ Run locally required intake first. Record only enough to route accurately.
 | Incident/security hotfix | Authorized containment and smallest clear correction; validate and reconcile affected artifacts after stabilization |
 | De-scope/removal | Assess dependencies, approve consequential removal, preserve superseded history, plan cleanup/migration |
 | Integration failure | Establish whether the cause is code, conflicting specs, missing requirements, or architecture; route to that owner |
-| External PR/diff review | `bmad-code-review`; do not implement findings in a review-only request |
+| External PR/diff review | Use the [standalone review handoff](handoffs.md#standalone-code-review) to choose a mode compatible with the allowed writes |
 
 A bug label does not prove approved intent. A refactor label does not authorize schema, contract, or behavior changes. Do not hide unrelated improvements in the active ticket.
 
-Use `bmad-correct-course` for significant midstream changes when its required upstream inputs exist. A spec-only update can stay in `bmad-spec`; ticket-only resequencing can stay in `bmad-ticket`.
+Use Sofia's REPLAN operation when a change materially affects active work. It traces stale requirements and dependent entries, reconciles the remaining tree, and leaves an in-progress build plan to its owner. Use SPEC for a requirements-only update and TICKETS for a breakdown-only update.
 
 ## Required implementation owner and mode
 

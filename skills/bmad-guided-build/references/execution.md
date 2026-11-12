@@ -18,13 +18,23 @@ Do not commit merely to make the tree clean. Ambiguous commit scope still needs 
 
 ## Planning and resumption
 
-Read the installed `bmad-build` and use its actual supported planning/resume interface. Stop initially at its written-plan checkpoint. Capture ticket, plan path/version, acceptance criteria, footprint, questions, risks, and high-impact actions. BMAD plan is COMPLETE only after the file exists and is read back.
+Read the installed `bmad-build` and use its supported planning/resume interface. In the current preview, request `full` at entry and on resume. Its entrypoint renders with `--set workflow.route=full`; the automatic and `oneshot` routes can implement before the wrapper's approval. Read the rendered workflow. Stop at CHECKPOINT 1 with the written draft and resolved open questions, then run the wrapper's reviews and approval flow. Capture the ticket, plan path/version, acceptance criteria, footprint, questions, risks, and high-impact actions. BMAD plan is COMPLETE only after the file exists and is read back.
 
-Do not invent a no-commit flag or bypass an incompatible nested operation. Pass restrictions as context; block only the incompatible path if no supported approach exists.
+The wrapper owns approval. At the checkpoint, let upstream apply its approval transition to `ready-for-dev` only after the wrapper's gates pass. For Approve and stop, use that upstream checkpoint action and return control. For an approved continuation, proceed from that checkpoint or invoke the exact approved plan path on resume. A draft re-enters planning. An existing `ready-for-dev` or `in-progress` status by itself is insufficient approval evidence. Re-read the plan before implementation and recheck the approval if the content changed. Preserve upstream's frozen intent and record wrapper evidence outside it.
 
 On resume, compare ticket, plan, code baseline, approvals, review evidence, and blockers. Reuse valid completed phases; investigate drift before redispatching. Reopen only affected phases. Formatting-only changes do not revoke otherwise valid approval.
 
+If implementation and upstream validation are already evidenced, continue at the first pending wrapper gate. Passing a `built` plan to upstream Build again can re-enter its internal review, so use the existing snapshot and ledger for review-only resumption.
+
+Before dispatch, check the installed workflow's actions and hooks. The current preview stages all changes since its Git baseline, including untracked files. If that would expose unrelated work to review or cause its review fixes to touch unrelated files, use a compatible scoped diff or an authorized isolated checkout that preserves the intended base and inputs. If neither is possible, stop the incompatible path before application edits and continue independent planning. Leave the original dirty tree intact.
+
 For unfinished implemented work from before 0.3.0, add the new initial/final `bmad-review` and triage phases as PENDING. Preserve matching plan approval and independent role-review evidence; do not infer that the newly required passes ran from an older COMPLETE review label. Follow [ticket-review.md](ticket-review.md) for pass reuse and snapshot validity.
+
+## Build completion boundary
+
+The current preview's full-route presentation step marks the plan `built` after upstream verification, then requests a commit when the tree is dirty. Return to the wrapper at `built`, before that commit and any unauthorized completion hook. Keep the resulting work available for scoped independent review, fixes, final review, and verification. Record the return point and the actual validation in the ledger. Any explicitly requested commit of this ticket's work belongs after the wrapper's final checks and must be limited to its authorized files. Upstream has no documented no-commit option for this step. If a host cannot return control before the side effect, block that execution path before application edits.
+
+`built` records the upstream implementation state. Wrapper completion requires its own evidence, and ticket acceptance or `done` requires the owning store workflow and applicable authorization.
 
 ## Risk classification in both modes
 

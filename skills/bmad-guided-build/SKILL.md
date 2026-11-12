@@ -3,7 +3,7 @@ name: bmad-guided-build
 description: A human-gated or automatic wrapper around bmad-build with Git checkpoints, evidence-backed plan review, Party Mode / Advanced Elicitation, independent implementation reviewers, and mandatory bmad-review, finding resolution, and final re-review.
 license: MIT
 metadata:
-  version: "0.3.0"
+  version: "0.4.0"
 ---
 
 # BMad Guided Build
@@ -49,7 +49,7 @@ Missing dependencies block their affected path. Continue independent authorized 
 
 ## 2. Create or resume the plan and classify risk
 
-Use `bmad-build` to create the written plan and stop at its supported plan checkpoint. Read it back and maintain the Guided Build Execution Ledger there. On resume, verify current artifacts before repeating completed phases.
+Use `bmad-build` to create the written plan and stop at its supported plan checkpoint. In the current preview, select its documented `full` route explicitly so the approval checkpoint is reached. Read the plan back and maintain the Guided Build Execution Ledger there. On resume, verify current artifacts before repeating completed phases.
 
 Apply the highest relevant [risk level](references/execution.md#risk-classification-in-both-modes), record the rationale, and show it to the user. Classify an older UNCLASSIFIED plan before proceeding. Preserve valid approvals/reviews when classification does not materially change the plan or reveal an unmet gate.
 
@@ -80,7 +80,7 @@ Validate acceptance coverage, scope, compatibility, relevant rollback/recovery, 
 
 ## 4. Implement, independently review, and verify
 
-Resume `bmad-build` from the approved plan. Let it implement, test, and perform its internal review, preserving the one-ticket boundary and permission restrictions.
+Resume `bmad-build` from the exact approved plan on the full route. Let it implement, test, and perform its internal review within the one-ticket boundary. Follow the [build completion boundary](references/execution.md#build-completion-boundary) before any upstream commit or follow-up action.
 
 Then perform mandatory [independent implementation review](references/implementation-review.md) and the initial [bmad-review ticket pass](references/ticket-review.md) on the same stable implementation snapshot. Use the current risk roster, fresh contexts where available, and capacity-aware batches. Keep findings isolated until all initial reviews finish; disclose degraded independence if fresh contexts are unavailable.
 

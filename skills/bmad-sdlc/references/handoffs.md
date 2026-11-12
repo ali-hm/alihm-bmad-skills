@@ -35,7 +35,7 @@ Prepare a concise dispatch in natural language or the selected skill's documente
 | Target | Absolute project/BMad root; affected repositories when more than one |
 | Operation | Discover, create, update, validate, plan, implement, review, resume, or status |
 | Intent | User's requested behavior, defect evidence, or refactor preservation goal |
-| Work item | Exact ticket/ref plus owning initiative/epic, spec folder, input artifact, or plan |
+| Work item | Exact ticket/ref plus owning initiative/epic, input artifact, or plan |
 | Authority | Relevant approved decisions, requirements, constraints, and their paths |
 | Acceptance | Observable completion criteria and required checks |
 | Permissions | Read-only/planning/implementation scope; permitted side effects; explicit restrictions |
@@ -53,7 +53,7 @@ Skill instructions are not a generic function API. Do not assume `invoke_skill(n
 
 Resolve and read the user's installed `bmad-guided-build/SKILL.md`; this is the required implementation entry point. Supply one exact ticket/change or its existing plan, target root, approved constraints, permissions, and the intended Interactive or Auto mode.
 
-Interactive is the default. When Auto is explicitly authorized and appropriate, invoke the guided skill in its documented Auto mode (the inspected skill accepts natural-language Auto requests and `--auto` in invocation text). This is not a shell command or renderer option. Do not turn it into `--set workflow.mode=auto` or dispatch `bmad-build-auto`.
+Interactive is the default. When Auto is explicitly authorized and appropriate, tell the guided wrapper to use Auto in the handoff. Auto is a wrapper choice. Keep its underlying Build route and review options separate.
 
 Let the guided wrapper own its Git checkpoint, internal build planning/resumption, risk reviews, plan approval, implementation, independent role review, initial/final `bmad-review`, finding resolution, ledger, and finalizer. Do not invoke or render its internal build yourself as an alternative entry point. Preserve the wrapper's exact final report contract.
 
@@ -67,25 +67,25 @@ For an independently authorized `bmad-code-review`, the inspected entry point re
 uv run --no-cache "<bmad-project-root>/_bmad/scripts/render_skill.py" --project-root "<bmad-project-root>" --skill "<selected-skill-root>"
 ```
 
-Standalone code review accepts `--set workflow.review=quick` or `thorough` when selected. Reverify those values against its installed entry point. This example is for standalone review, not a direct-build recipe.
+The current `bmad-code-review` accepts `quick` or `thorough`, and `no-code` selects `workflow.fixes=handoff`. The no-code path can still write findings and handoff files. Use it for review without fixes when those artifacts are authorized. For a strictly read-only review, use an explicit `skill:bmad-review` handoff with a chat report and compatible hooks and lens configuration. Check scope before dispatching either skill.
 
-Run the entry command exactly as that skill requires, then read the returned absolute `workflow.md`. Do not skip rendering or execute template sources directly. Missing setup and other runtime errors follow that skill's recovery/stop rules; a general discovery fallback is not permission to bypass an execution failure.
+Run the entry command as the installed skill directs. Follow the workflow printed on stdout and read each rendered step it references. Missing setup and other runtime errors follow that skill's recovery and stop rules.
 
 Supply review intent, target diff/PR, plan, and read-only permissions as context; they are not invented renderer flags. Standalone review does not replace the guided wrapper's mandatory reviews. Creating this coordinator never grants version-control or external-system permission.
 
-### Specification
+### Planning documents
 
-`bmad-spec` receives the input sources, the target spec folder or meaningful slug, and the intended create/update/validate operation. Programmatic invocations may run headless and require an explicit or derivable slug. Inspect returned JSON errors as errors, not as completed artifacts.
+Call Mary (`bmad-agent-analyst`) for a brief or BRD and John (`bmad-agent-pm`) for a PRD or other planning document. Pass the create/update/validate intent, inputs, existing document or ticket, and scope. Their document workflows delegate to `bmad-facilitate`; retain that handoff so the agent supplies its template libraries and the document's place in the ticket tree. In the current template helper, repeat `--libraries-of <skill-root>` for each skill whose libraries are needed. Check the returned document and any open questions before using it.
 
-The spec kernel and spec-authored companions are derived from its append-only memlog. Update through `bmad-spec`; never hand-patch derived outputs. Adopted companions stay owned by their originating workflow. Project-approved decisions retain authority over generated proposals.
+### Requirements, tickets, and status
 
-### Tickets and status
+Call `bmad-agent-po` with the owning initiative/epic, exact ticket or path, source documents, approved decisions, and the requested operation. SPEC derives the container's Requirements, Constraints, and spec-authored companions from its append-only memlog and sources. Route changes to these derived sections through SPEC. Keep stable requirement IDs and preserve the originating workflow's ownership of adopted companions.
 
-`bmad-ticket` reads the configured store and its own operation references. Supply the full spec folder for decomposition so capability IDs remain traceable.
+Use TICKETS to slice or re-slice, REFINE for one ticket, VALIDATE to check a ticket or tree, and REPLAN for material changes during delivery. Use the installed Method store's documented status/next/find operations before selecting a ready item. Preserve the owning context for refs relative to an epic. A ready entry can be built directly from its ref without creating a story file.
 
-Use its documented status/next/query operations before selecting a ready item. Ticket refs can be relative to an epic; preserve the owning context. Use ticket-store commands rather than directly editing state fields or assuming repo-store commands work on a tracker.
+Sofia's BOARD can update the configured store, commit repository artifacts, publish to a tracker, or dispatch a raw build. For read-only status, use local status or an authorized read-only tracker query without mirroring remote state into local files. Identify whether status is local or current from the tracker. Sofia's headless/autonomous flow can commit or publish automatically. When only local planning is authorized, use the interactive draft/validation path and return before the store write. Approval of requirements or a split does not itself authorize a commit or tracker mutation. Send an authorized implementation handoff to `bmad-guided-build` yourself. A build's `built` result does not grant ticket acceptance or authorize marking it `done`.
 
-Publishing to a tracker is an external mutation with its own authorization. A build's `built` result is not automatically `done`; observe the installed acceptance contract.
+An older `SPEC.md` can still be supplied as source material. If the installed workflow needs a migrated ticket tree, consult the upstream `bmad` migration workflow and preserve existing artifacts until migration is authorized.
 
 ## Validate the return
 

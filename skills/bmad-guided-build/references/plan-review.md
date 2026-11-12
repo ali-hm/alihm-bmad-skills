@@ -176,7 +176,9 @@ Examples:
 
 ### Independent execution policy
 
-Use the shared [review scheduling policy](implementation-review.md#review-scheduling-and-isolation) for Party Mode as well as implementation review. It defines capacity detection, fresh-context batches, evidence isolation, bounded recovery, and degraded review disclosure. Do not reduce the confirmed roster just because there are fewer concurrent slots.
+Invoke the installed `bmad-party-mode` with the plan, its read-only scope, and the selected roles as an inline cast. Use its documented subagent mode when available and permitted. In Interactive, return to the wrapper when the user ends the party. In explicit Auto, request the documented `--non-interactive` session so the discussion returns control at a natural close. The mode and cast are invocation inputs, not edits to defaults or saved parties. Check project memory, output, and hooks before any side effects.
+
+Use the shared [review scheduling policy](implementation-review.md#review-scheduling-and-isolation) for the first independent reads. Later Party Mode discussion can compare those views. Keep all selected roles when host capacity requires fresh-context batches, and disclose any same-context fallback in the receipt.
 
 ### Party Mode review questions
 
@@ -252,11 +254,11 @@ After applying safe changes:
 
 ## Advanced Elicitation
 
-Use `bmad-advanced-elicitation` against the exact plan.
+Invoke `bmad-advanced-elicitation` by name with the exact plan version, purpose, reader, and settled constraints. The current skill begins a round as soon as it has a target and returns located findings and a proposed revision. Check its configured report destination and activation hooks before running.
 
 ### Interactive
 
-Let the user select methods normally.
+Use methods the user supplied, if any. Otherwise let the installed skill select methods and start immediately. Present its proposed changes for the user's choice.
 
 Afterward:
 - apply only user-accepted refinements;
@@ -269,7 +271,7 @@ Afterward:
 
 Required for HIGH and CRITICAL.
 
-Choose 2–4 methods appropriate to risk.
+Use the installed catalog to name 2–4 methods or directions appropriate to risk. Treat the examples below as areas to probe and resolve actual methods from the catalog. Keep the round's input on one plan revision. Follow the installed reader limits and disclose any degraded execution.
 
 #### Foundational architecture
 - First Principles
@@ -307,7 +309,7 @@ Choose 2–4 methods appropriate to risk.
 - Boundary/Load Extremes
 - Pre-mortem
 
-If installed method names differ, choose the closest by intent.
+Collect the proposed revision before editing. The wrapper applies only in-scope refinements covered by the Auto authorization and records each disposition. Leave any premise change or consequential decision for the user.
 
 ### Mandatory Advanced Elicitation receipt
 

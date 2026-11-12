@@ -3,7 +3,7 @@ name: change-intake-governance
 description: Classify and route any new issue, bug, story, feature request, enhancement, architecture change, NFR change, dependency upgrade, refactor, incident, security finding, de-scope request, or integration problem after implementation has started. Use BMAD's smallest safe workflow, preserve upstream authority, require explicit approval for consequential changes, and never silently expand the active ticket.
 license: MIT
 metadata:
-  version: "0.3.0"
+  version: "0.4.0"
 ---
 
 # Change Intake Governance
@@ -25,6 +25,8 @@ Use Interactive mode by default. Use the same skill's Auto mode only when explic
 If `bmad-guided-build` is unavailable, report the dependency and block implementation rather than falling back to a raw build. Classification and independent planning may continue.
 
 Do not silently expand the scope of an active ticket.
+
+For BMad ticket work, discover `bmad-agent-po` (Sofia). Use SPEC for requirements on the owning container, TICKETS to slice or re-slice, REFINE to prepare one ticket, and REPLAN when active work is materially affected. Pass the exact initiative/epic/ticket, approved sources and decisions, and requested operation. Sofia's headless/autonomous path can commit or publish automatically. When authorized only for local planning, use the interactive draft/validation path and stop before the store write. Keep tracker state changes and implementation dispatch within their own permissions. Classification can finish when a downstream capability is missing.
 
 Reuse existing explicit scope decisions and permissions that still match the affected work. Carry their source, material plan/version, no-commit restrictions, and dirty-baseline choices into the guided handoff. Ask again only for missing or materially changed choices; classification alone does not grant implementation permission.
 
@@ -82,7 +84,7 @@ Examples:
 Default route:
 
 - small/coherent defect -> `bmad-guided-build`;
-- larger defect -> `bmad-ticket`, then `bmad-guided-build` per ticket;
+- larger defect -> Sofia's REFINE for one bug ticket or TICKETS for a breakdown, then `bmad-guided-build` per ready ticket;
 - production-relevant or risky defect -> use `bmad-guided-build` with its required risk reviews; add standalone `bmad-code-review thorough` only for a remaining review gap.
 
 If investigation shows the requirement, spec, UX, or architecture is wrong or ambiguous, STOP treating it as a pure defect and reclassify it.
@@ -122,7 +124,7 @@ Route:
 
 1. identify the owning epic/spec;
 2. verify it is genuinely within approved scope;
-3. use `bmad-ticket` to add or revise the implementation unit;
+3. use Sofia's REFINE or TICKETS to add or revise the implementation unit;
 4. check dependencies and ordering;
 5. implement with `bmad-guided-build` when authorized.
 
@@ -147,11 +149,11 @@ Route:
 2. perform decision governance;
 3. assess product value, scope, UX, security, NFR, architecture, deployment, and dependency impacts;
 4. accept / reject / defer through explicit human decision;
-5. if accepted during active implementation, use `bmad-correct-course` when the change is significant;
+5. identify whether the accepted change materially disrupts active implementation;
 6. update Product Brief / PRD when affected;
 7. update UX and Architecture when affected;
-8. create or update the affected epic spec;
-9. use `bmad-ticket` to create/revise implementation units;
+8. use Sofia's SPEC for affected ticket requirements and TICKETS or REFINE for dependent units, or REPLAN to coordinate both during active delivery;
+9. check readiness and dependencies in the configured store;
 10. implement only after the revised planning artifacts are approved.
 
 ---
@@ -165,8 +167,8 @@ Route:
 1. determine whether a product requirement also changes;
 2. use decision governance for consequential UX choices;
 3. reconcile BMAD UX artifacts;
-4. update affected epic specs and tickets;
-5. use `bmad-correct-course` when the change materially disrupts active work;
+4. reconcile affected ticket requirements and implementation units with Sofia, using REPLAN when the change materially disrupts active work;
+5. verify the updated tree and its affected dependencies;
 6. then implement with `bmad-guided-build`.
 
 Minor cosmetic changes that do not alter product behavior may go directly to `bmad-guided-build` when bounded and low-risk.
@@ -192,9 +194,9 @@ Route:
 3. identify all affected approved decisions and assumptions;
 4. evaluate alternatives, migration cost, compatibility, security, operations, and already-written code;
 5. require explicit human approval;
-6. use `bmad-correct-course` when implementation is already underway and the change is significant;
+6. identify affected active work for Sofia's REPLAN when the change is significant;
 7. update the Architecture Spine / security / NFR decisions first;
-8. propagate to affected PRD/UX/specs/tickets where necessary;
+8. propagate to affected PRD/UX artifacts and reconcile the ticket tree through Sofia, using REPLAN for significant changes during implementation;
 9. add migration or remediation tickets explicitly;
 10. implement only after consistency validation.
 
@@ -209,7 +211,7 @@ Use when externally observable behavior is intended to remain unchanged.
 Route:
 
 - bounded internal refactor -> `bmad-guided-build`;
-- large refactor with multiple implementation units -> `bmad-spec` or `bmad-ticket`, then `bmad-guided-build`;
+- large refactor with multiple implementation units -> Sofia's SPEC if requirements need distilling, then TICKETS and `bmad-guided-build`;
 - refactor that changes cross-epic architecture -> reclassify as ARCHITECTURE CHANGE.
 
 Require tests or equivalent validation that demonstrates behavior remains unchanged.
@@ -223,7 +225,7 @@ Use for library, framework, SDK, runtime, compiler, OS support, database version
 Route:
 
 - routine patch/minor upgrade with no changed approved technical decision -> `bmad-guided-build`;
-- major upgrade, runtime/platform change, compatibility break, or change to an approved TECH/DEPLOY decision -> decision governance, and `bmad-correct-course` when significant;
+- major upgrade, runtime/platform change, compatibility break, or change to an approved TECH/DEPLOY decision -> decision governance, and Sofia's REPLAN when active work is materially affected;
 - update architecture/spec/tickets where required before implementation.
 
 Always assess breaking changes, security motivation, deployment impact, and supported environments.
@@ -255,9 +257,9 @@ Route:
 
 1. assess dependencies and already-built code;
 2. use decision governance for consequential scope removal;
-3. use `bmad-correct-course` when active implementation is materially affected;
+3. identify affected active work for Sofia's REPLAN;
 4. update Product Brief / PRD / UX / Architecture as appropriate;
-5. supersede or cancel affected specs/tickets rather than silently deleting historical intent;
+5. reconcile affected ticket requirements and entries through Sofia, using REPLAN when active work is materially affected and preserving historical intent;
 6. create cleanup/migration tickets if implementation already exists.
 
 ---
@@ -285,7 +287,7 @@ Route:
 
 1. identify intended requirement/spec/ticket;
 2. review the change against that intent;
-3. use `bmad-code-review`, normally `thorough` for production work;
+3. use `bmad-code-review no-code` when review artifacts may be written, normally `thorough` for production work. For a strictly read-only request, use `skill:bmad-review` with chat output and compatible hooks;
 4. do not accept code that introduces unapproved product or architecture decisions;
 5. route any discovered upstream conflicts through the appropriate classification above.
 
@@ -320,10 +322,10 @@ Do not modify an approved consequential decision without explicit human approval
 Use the smallest safe BMAD path.
 
 - Clear one-session implementation change -> `bmad-guided-build`.
-- Larger coherent work -> `bmad-ticket`, then `bmad-guided-build` per ticket.
-- New or changed epic-level behavior -> reconcile/create `bmad-spec`, then `bmad-ticket`.
-- Significant mid-implementation change -> `bmad-correct-course`.
-- Standalone review of a PR/diff/branch/change -> `bmad-code-review`.
+- Larger coherent work -> Sofia's TICKETS and REFINE as needed, then `bmad-guided-build` per ready ticket.
+- New or changed epic-level behavior -> Sofia's SPEC, then TICKETS when the breakdown changes.
+- Significant mid-implementation change -> Sofia's REPLAN.
+- Standalone review of a PR/diff/branch/change -> `bmad-code-review` in no-code mode when review artifacts may be written. For a strictly read-only request, use `skill:bmad-review` with chat output and compatible hooks.
 - Completed epic -> `bmad-retrospective` plus relevant integration/acceptance testing.
 
 For explicitly authorized automatic implementation, use `bmad-guided-build` Auto mode under the entry-point rules above. Do not substitute `bmad-build-auto`. Each guided invocation handles one ticket/change and retains its own completion gates.

@@ -3,7 +3,7 @@ name: bmad-sdlc
 description: Coordinate BMad across a project's lifecycle, from a simple idea or supplied specification through planning, implementation, validation, and ongoing maintenance. Use for starting or adopting projects, delivering features, fixing bugs, refactoring, or resuming BMad work when the user wants lifecycle guidance and execution. Do not activate for unrelated questions or isolated edits the user is directing.
 license: MIT
 metadata:
-  version: "0.3.0"
+  version: "0.4.0"
 ---
 
 # BMad SDLC

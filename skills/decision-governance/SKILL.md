@@ -9,7 +9,7 @@ description: >-
   and validating consistency. Never start implementation.
 license: MIT
 metadata:
-  version: "0.3.0"
+  version: "0.4.0"
 ---
 
 # Decision Governance Workflow
@@ -164,7 +164,7 @@ Potential sources include:
 - BMAD PRD
 - BMAD UX artifacts
 - BMAD Architecture Spine
-- BMAD Spec Kernel
+- BMad initiative or epic ticket requirements and constraints
 - epic specifications
 - tickets.toml
 - individual stories/tickets
@@ -205,13 +205,14 @@ Before propagation, identify each affected artifact's owner and supported update
 | Artifact | Update path |
 | --- | --- |
 | Canonical decision register | Project's decision-register procedure; preserve superseded history |
-| Product/UX/architecture artifacts | Owning project/BMad workflow, preserving approved intent |
-| Spec kernel and spec-authored companions | `bmad-spec` with the approved change and full spec context; update its append-only source log through that skill |
-| Adopted spec companions | Their originating workflow; do not treat every file in a spec folder as spec-generated |
-| Tickets, dependencies, acceptance, or status | `bmad-ticket` and the configured store's supported operations |
+| Product brief or PRD | Mary (`bmad-agent-analyst`) for a brief or John (`bmad-agent-pm`) for a PRD, with the approved decision and rationale. They delegate document work to `bmad-facilitate`. |
+| UX or architecture | Owning project/BMad workflow, preserving approved intent |
+| Ticket Requirements, Constraints, and spec-authored companions | Sofia (`bmad-agent-po`), SPEC, with the approved change, owning initiative or epic, and source files. Preserve requirement IDs and update derived content through the owning memlog or parent requirements. |
+| Adopted spec companions | Their originating workflow, then Sofia's SPEC for changes that affect the derived requirements. |
+| Tickets, dependencies, acceptance, or status | Sofia's TICKETS, REFINE, VALIDATE, or BOARD as applicable, and the configured store's supported operations. |
 | Project instructions or other human-maintained documents | Scoped direct edits only when permitted by that document's policy |
 
-Never hand-patch generated spec outputs, source logs, or ticket-state fields to make downstream documents look consistent. Do not infer that a repository store and an external tracker have interchangeable commands. Pass existing authorization through; external tracker changes still need authorization for that destination and scope.
+Never hand-patch generated spec outputs, source logs, or ticket-state fields to make downstream documents look consistent. Confirm the configured store's behavior. Sofia's headless/autonomous path can commit or publish automatically. For local planning, use the interactive draft/validation path and return before an unauthorized store write. A decision approval covers its stated scope, not a Git commit, tracker mutation, or BOARD build dispatch. Retain the authorized local draft and record any outstanding store write or validation.
 
 If an owning workflow is missing or fails, block that propagation path, preserve the approved decision and partial evidence, and continue independent authorized reconciliation. Report the remaining inconsistency rather than declaring planning READY. Do not replace a failed owner with manual edits to its derived files.
 
@@ -224,9 +225,9 @@ Use the appropriate BMAD workflow where useful:
 - Product requirement/scope change → update/reconcile PRD.
 - UX behavior change → reconcile BMAD UX artifacts.
 - Cross-epic technical/architecture change → reconcile BMAD Architecture Spine.
-- Epic-level behavior change → reconcile the affected bmad-spec.
-- Story decomposition change → reconcile tickets.
-- Significant change after implementation has started → use bmad-correct-course where appropriate.
+- Epic-level behavior change → reconcile the owning ticket's Requirements and Constraints through Sofia's SPEC.
+- Story decomposition change → reconcile the ticket tree through Sofia's TICKETS.
+- Significant change after implementation has started → use Sofia's REPLAN to identify stale requirements and reconcile remaining work. Return affected in-progress plans to their build owner.
 
 This workflow remains planning-only. When planning is READY and implementation is separately authorized, its implementation handoff must name the user's custom `bmad-guided-build` exclusively. Never invoke `bmad-build` or `bmad-build-auto` directly; the guided wrapper owns its internal build calls.
 

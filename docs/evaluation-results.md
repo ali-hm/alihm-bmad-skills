@@ -2,6 +2,17 @@
 
 This file records actual checks only. Scenario expectations live in the individual skill references. Routing evaluations use hypothetical read-only fixtures; no application was built or deployed during these evaluations.
 
+## 0.4.0 BMad preview alignment — 2026-11-12 (Asia/Tehran)
+
+| Check | Evidence |
+| --- | --- |
+| Package validation | Release metadata for `v0.4.0`, all four skill-format checks, local references, and `git diff --check` passed. The shipped skills and README have no references to the five retired skill names listed in the compatibility guide. |
+| Upstream runtime smoke | Ran setup in an isolated project using upstream commit `a867e160` and local Python dependencies. Rendered Build's full route and verified its written-plan checkpoint, approved-plan resumption, and `built` transition before the commit step. Rendered Sofia's six referenced operations and standalone no-code review, which can still write findings to a plan. |
+| Templates, tickets, and lenses | The upstream helper discovered the brief, BRD, PRD, and light PRD templates and merged the brief and PRD. The upstream ticket-store test for readiness of unpulled entries passed. The review resolver returned all five documented default lens codes. |
+| Independent routing walkthrough | A fresh read-only context exercised a PRD-to-epics handoff, a small Interactive ticket with no commit, and an approved change during delivery with local-only permissions. Its findings led to explicit handling for Sofia's headless commits/publication, tracker mirroring, and Build's dirty baseline. |
+
+Live document facilitation, plan approval through implementation, actual review passes, tracker integration, and migration of an existing project were outside these checks.
+
 ## 0.3.0 ticket review gates — 2026-10-16 (Asia/Tehran)
 
 One fresh, read-only agent context (`/root/evaluate_ticket_review`, local Codex; model identifier not recorded) evaluated GB13–GB26 and three cross-skill handoffs using the actual skills and relevant references plus raw hypothetical facts. It was instructed not to read expected observations, author diffs, or earlier evaluation results. Evidence is retained in that agent's initial and follow-up final responses in this task history. No first-pass instruction failure was identified in these 17 cases.

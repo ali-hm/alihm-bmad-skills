@@ -11,5 +11,6 @@ Use when authoring this skill. Validate formatting, then give a fresh read-only 
 | CI05 | Clear approved defect, implementation authorized, wrapper missing but raw BMad builds present | Classification may complete; implementation blocked on wrapper; no raw-build fallback |
 | CI06 | Review external patch only; patch changes tenant isolation without approval | EXTERNAL CHANGE / PR / PATCH with architecture/security conflict routed upstream; read-only review, no fixes or acceptance of unapproved behavior |
 | CI07 | Bounded defect violates settled approved behavior; classification finishes, but target guided wrapper lacks required bmad-review | Intake can finish with a bounded guided route; implementation readiness blocked by downstream dependency, no raw fallback or unnecessary product decision |
+| CI08 | Approved requirements change affects an in-progress ticket and future entries; current Sofia preview, tracker updates not authorized | Routes through Sofia's REPLAN after decision approval; preserves the in-progress build plan and finished work; reconciles authorized local artifacts and reports pending tracker operations |
 
 Record scenario IDs, actual route, side effects proposed/avoided, approval reuse, missing dependencies, and PASS/FAIL with reasons. These are dry runs unless specialist execution occurred in a separately authorized fixture.

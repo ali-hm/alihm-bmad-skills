@@ -8,22 +8,28 @@ The coordinator reads the installed skill catalog and actual specialist instruct
 
 ## Authoring snapshot
 
-The locally installed BMad module records inspected on 2026-10-10 reported:
+Bundle 0.4.0 targets [BMad Method main at a867e160](https://github.com/bmad-code-org/BMAD-METHOD/tree/a867e1604b365d48ea03cbd109da1066ba0c84bc), checked on 2026-11-12. Upstream describes this line as the v7 preview. Its Method and Core Tools manifests both report `6.13.0-next`, so the commit identifies the inspected interfaces more precisely than the manifest versions. Compatibility with the v6.12 stable line or every revision of the preview is unverified. See the [upstream installation guide](https://github.com/bmad-code-org/BMAD-METHOD/blob/a867e1604b365d48ea03cbd109da1066ba0c84bc/docs/start/install-bmad.md).
 
-| Module | Recorded version |
+## Upgrade from earlier preview skills
+
+| Previous skill or operation | Current route |
 | --- | --- |
-| Method | 6.13.0-next |
-| Core Tools | 6.13.0-next |
+| `bmad-product-brief` | `bmad-agent-analyst` (Mary) uses the brief template via `bmad-facilitate`. |
+| `bmad-prd` | `bmad-agent-pm` (John) uses the PRD template via `bmad-facilitate`. |
+| `bmad-spec` | `bmad-agent-po` (Sofia), SPEC. The owning initiative or epic ticket holds the requirements and constraints. |
+| `bmad-ticket` | Sofia's TICKETS, REFINE, VALIDATE, or BOARD as appropriate. |
+| `bmad-correct-course` | Sofia's REPLAN for material changes during delivery. |
+| Explicit ingest or document sharding requests | `bmad-ingest` for cited source notes and `bmad-shard-pro` for long-document navigation. |
 
-This is an authoring reference, not a promise of compatibility with every release carrying that label. No upstream commit identifier or broad supported version range has been established. Before releasing against an updated upstream version, inspect its interfaces and exercise the affected routes in a separate sample project.
+Use upstream `bmad setup` to inspect stale skill copies and runtime changes. Check how the installed setup moves customizations, including `bmad-ticket.toml` to `bmad-agent-po.toml`. Compare old overrides with the new Sofia and Facilitate interfaces before carrying them forward. Use the upstream migration workflow separately if an older artifact tree needs conversion. Preserve existing plans, decision history, and reviews, and verify the migration scope before authorizing writes. [Upstream retirement list](https://github.com/bmad-code-org/BMAD-METHOD/blob/a867e1604b365d48ea03cbd109da1066ba0c84bc/skills/bmod-method/retired.toml)
 
 ## Required capabilities
 
-For guided implementation, the host must discover bmad-build and bmad-review. Version 0.3.0 adds mandatory initial/final bmad-review passes in both modes; check review setup before application implementation. Party Mode and Advanced Elicitation require bmad-party-mode and bmad-advanced-elicitation for the selected/risk-required phases. If a required capability is absent, stop that path and report the missing dependency.
+For guided implementation, the host must discover `bmad-build` and `bmad-review`. The wrapper uses the full build route, its written-plan checkpoint, and the approved plan path for resumption. It takes control at `built` before upstream's default commit step. Both modes retain mandatory initial and final `bmad-review` passes. Party Mode and Advanced Elicitation need `bmad-party-mode` and `bmad-advanced-elicitation` for the selected or risk-required phases. Report missing capabilities on the affected route.
 
-The installed bmad-review entrypoint and default lens configuration were inspected again on 2026-10-16. That installation supports explicit caller directives, resolved customization, code/document lens applicability, and separate findings without severity. Its available lenses included edge-case-hunter, verification-gap, adversarial, structure, and prose. This does not establish an upstream commit or version range. Resolve actual project overrides, lens codes, ordering, hooks, and output contracts before use; see the [ticket review gate](../skills/bmad-guided-build/references/ticket-review.md).
+The pinned `bmad-review` supports explicit caller directives, resolved customization, code/document lens applicability, and separate findings without severity. Its default lenses include edge-case-hunter, verification-gap, adversarial, structure, and prose. Resolve actual project overrides, lens codes, ordering, hooks, and output contracts before use. See the [ticket review gate](../skills/bmad-guided-build/references/ticket-review.md).
 
-Lifecycle routes additionally select installed specialists such as bmad-product-brief, bmad-prd, bmad-ux, bmad-architecture, bmad-spec, bmad-ticket, bmad-correct-course, bmad-project-context, and review/QA skills as needed. Not every route needs every specialist.
+Lifecycle routes select installed specialists according to the request, including UX, architecture, project context, or QA. Sofia's configured store can have commit or publication steps. Read-only status and local planning drafts have their own scope and do not authorize those operations.
 
 The host needs to run BMad's configured Python helpers with uv, read/write authorized project files, inspect Git state, and run the project's validation commands. Read-only independent reviewer contexts are preferred. When only same-context personas are available, the guided wrapper must disclose degraded independence and must not claim an independent-context review occurred.
 
@@ -41,4 +47,4 @@ Package validation checks metadata, bundle version agreement, local references, 
 
 Keep live integration results separate from package-check results. The initial publication preparation did not run a live BMad build or publish this package.
 
-The evaluation procedure covers all four skills and checks risk classification, early exits, permission reuse, artifact ownership, reviewer capacity, and the 0.3.0 ticket review gates. Consult [evaluation.md](evaluation.md) and [evaluation-results.md](evaluation-results.md) for actual evidence and host-specific NOT_RUN limitations. Prompt-only dry runs do not establish that a host can execute BMad's planning/resume interface, run bmad-review, or supply independent reviewer contexts.
+The evaluation procedure covers all four skills and checks risk classification, early exits, permission reuse, artifact ownership, reviewer capacity, and ticket review gates. Consult [evaluation.md](evaluation.md) and [evaluation-results.md](evaluation-results.md) for actual evidence. Prompt-only dry runs do not establish that a host can execute BMad's planning/resume interface, run `bmad-review`, or supply independent reviewer contexts.

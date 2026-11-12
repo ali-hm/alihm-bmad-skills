@@ -4,6 +4,18 @@ This publication repository uses one semantic version for the entire four-skill 
 
 ## [Unreleased]
 
+## [0.4.0] - 2026-11-12
+
+### Changed
+
+- Targeted the BMad v7 preview snapshot `a867e160`. Mary and John now route briefs and PRDs through Facilitate. Sofia owns ticket requirements, slicing, refinement, validation, and mid-flight replanning.
+- Pinned guided implementation to the upstream full route. The wrapper owns approval and returns from upstream at `built` before the commit step, then runs its existing review and verification gates.
+- Updated Party Mode and Advanced Elicitation handoffs for the current roster, invocation, and proposal flows. Added optional routing for Ingest and Shard Pro when the user requests those capabilities.
+
+### Upgrade notes
+
+- Update the four companion skills together. The previous bundle's retired specialist routes are replaced in this version. Review the [compatibility and migration guidance](docs/compatibility.md) before applying it to an older BMad project.
+
 ## [0.3.0] - 2026-10-16
 
 ### Changed
